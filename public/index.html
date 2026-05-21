@@ -354,6 +354,305 @@
         }
         .form-cta-feature { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--brand-body); }
         .form-cta-feature svg { color: #C200FF; flex-shrink: 0; margin-top: 2px; }
+
+        /* ──────────────────────────────────────────────────────────────
+           HERO — editorial redesign (keeps original mockup grid intact)
+           ────────────────────────────────────────────────────────────── */
+        .hero-redux {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(900px 540px at 92% -10%, rgba(194, 0, 255, 0.14), transparent 60%),
+                radial-gradient(720px 460px at -8% 22%, rgba(253, 76, 92, 0.12), transparent 60%),
+                linear-gradient(180deg, #fbfbff 0%, #ffffff 78%);
+        }
+        /* Faint diagonal pinstripe texture */
+        .hero-redux::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: repeating-linear-gradient(
+                115deg,
+                rgba(0, 11, 51, 0.025) 0px,
+                rgba(0, 11, 51, 0.025) 1px,
+                transparent 1px,
+                transparent 14px
+            );
+            pointer-events: none;
+            mask-image: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.0) 70%);
+            -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.0) 70%);
+        }
+        /* Decorative top-right corner bracket */
+        .hero-redux::after {
+            content: '';
+            position: absolute;
+            top: 110px; right: 24px;
+            width: 56px; height: 56px;
+            border-top: 2px solid #C200FF;
+            border-right: 2px solid #C200FF;
+            border-top-right-radius: 8px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        @media (max-width: 767px) { .hero-redux::after { display: none; } }
+
+        /* Eyebrow: "01 — Datasheq" */
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: 'Roboto Mono', ui-monospace, monospace;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--brand-ink);
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--brand-line);
+            border-radius: 999px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        .hero-eyebrow .num { color: var(--brand-coral); font-weight: 700; }
+        .hero-eyebrow .sep { color: var(--brand-muted); }
+
+        /* Editorial headline */
+        .hero-headline {
+            font-family: 'HK Grotesk', 'Hanken Grotesk', Inter, sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.02;
+            color: var(--brand-ink);
+            font-size: clamp(38px, 6.5vw, 76px);
+        }
+        .hero-headline .serif-accent {
+            font-family: 'Roboto Slab', Georgia, serif;
+            font-style: italic;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--brand-ink);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.05em;
+        }
+        /* Hand-drawn coral underline */
+        .hero-headline .serif-accent::after {
+            content: '';
+            position: absolute;
+            left: -2%; right: -2%;
+            bottom: -0.06em;
+            height: 14px;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 14' preserveAspectRatio='none'><path d='M2 9 C 40 2, 80 13, 118 6 S 200 12, 218 5' fill='none' stroke='%23FD4C5C' stroke-width='3' stroke-linecap='round'/></svg>");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            pointer-events: none;
+        }
+        .hero-headline .accent-coral { color: var(--brand-coral); }
+        .hero-headline .light {
+            font-weight: 300;
+            color: rgba(0, 11, 51, 0.62);
+            letter-spacing: -0.025em;
+        }
+
+        /* Live pulse strip */
+        .hero-live {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-size: 12px; font-weight: 600;
+            color: var(--brand-body);
+            padding: 8px 14px 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid var(--brand-line);
+        }
+        .hero-live .pulse {
+            position: relative;
+            width: 8px; height: 8px; border-radius: 999px;
+            background: #16a34a;
+            box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6);
+        }
+        .hero-live .pulse::after {
+            content: '';
+            position: absolute; inset: -4px;
+            border-radius: 999px;
+            background: rgba(22, 163, 74, 0.35);
+            animation: heroPulse 1.8s ease-out infinite;
+        }
+        @keyframes heroPulse {
+            0%   { transform: scale(0.6); opacity: 0.9; }
+            100% { transform: scale(1.7); opacity: 0;   }
+        }
+        .hero-live .num-display {
+            font-family: 'Roboto Slab', Georgia, serif;
+            font-weight: 700;
+            color: var(--brand-ink);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-live .pulse::after { animation: none; }
+        }
+
+        /* Legal codes ticker */
+        .codes-strip {
+            position: relative;
+            margin-top: 18px;
+            padding: 14px 0;
+            border-top: 1px solid var(--brand-line);
+            border-bottom: 1px solid var(--brand-line);
+        }
+        .codes-strip-label {
+            font-family: 'Roboto Mono', ui-monospace, monospace;
+            font-size: 10px; letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--brand-muted);
+            margin-bottom: 8px;
+        }
+        .codes-track {
+            display: flex; flex-wrap: wrap; align-items: center;
+            gap: 8px 14px;
+        }
+        .code-chip {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'Roboto Mono', ui-monospace, monospace;
+            font-size: 12px; font-weight: 600;
+            color: var(--brand-ink);
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid var(--brand-line);
+            white-space: nowrap;
+        }
+        .code-chip .marker {
+            width: 6px; height: 6px; border-radius: 2px;
+            background: var(--brand-purple);
+        }
+        .code-chip:nth-child(2n) .marker { background: var(--brand-coral); }
+        .code-chip:nth-child(3n) .marker { background: var(--brand-cyan, #5820DC); }
+
+        /* Asymmetric CTA */
+        .hero-cta-row {
+            display: flex; flex-wrap: wrap; align-items: center;
+            gap: 14px 22px;
+        }
+        .hero-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-weight: 700; font-size: 15px;
+            color: var(--brand-ink);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 2px;
+        }
+        .hero-link::after {
+            content: '';
+            position: absolute; left: 0; right: 24px;
+            bottom: 0;
+            height: 1.5px; background: var(--brand-ink);
+            transition: right 0.2s ease, background 0.2s ease;
+        }
+        .hero-link:hover { color: #5820DC; }
+        .hero-link:hover::after { right: 32px; background: #5820DC; }
+        .hero-cta-note {
+            font-size: 12px; color: var(--brand-muted);
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .hero-cta-note::before {
+            content: ''; width: 18px; height: 1.5px;
+            background: var(--brand-line); display: inline-block;
+        }
+
+        /* Visual side */
+        .hero-visual {
+            position: relative;
+        }
+        /* Dot-grid texture behind the mockups */
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            top: -28px; left: -28px;
+            width: 180px; height: 180px;
+            background-image: radial-gradient(rgba(0, 11, 51, 0.18) 1px, transparent 1.5px);
+            background-size: 14px 14px;
+            opacity: 0.55;
+            pointer-events: none;
+            border-radius: 6px;
+            z-index: 0;
+        }
+        .hero-visual > .relative { position: relative; z-index: 1; }
+
+        /* Floating live-alert toast */
+        .live-toast {
+            position: absolute;
+            left: -18px;
+            top: 36%;
+            transform: translateY(-50%);
+            background: #fff;
+            border: 1px solid var(--brand-line);
+            border-left: 3px solid #16a34a;
+            border-radius: 14px;
+            padding: 12px 14px;
+            box-shadow: 0 18px 40px -18px rgba(0, 11, 51, 0.30);
+            display: flex; align-items: center; gap: 10px;
+            min-width: 220px;
+            z-index: 3;
+            animation: toastIn 0.6s 0.4s ease-out backwards;
+        }
+        .live-toast .toast-icon {
+            width: 30px; height: 30px; border-radius: 999px;
+            background: rgba(22, 163, 74, 0.12);
+            color: #16a34a;
+            display: inline-flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .live-toast .toast-title {
+            font-size: 12px; font-weight: 700; color: var(--brand-ink);
+            line-height: 1.25;
+        }
+        .live-toast .toast-sub {
+            font-size: 11px; color: var(--brand-muted);
+            font-family: 'Roboto Mono', ui-monospace, monospace;
+            letter-spacing: 0.06em;
+            margin-top: 2px;
+        }
+        @keyframes toastIn {
+            0%   { opacity: 0; transform: translate(-12px, calc(-50% + 8px)); }
+            100% { opacity: 1; transform: translate(0,     -50%); }
+        }
+        @media (max-width: 1023px) {
+            .live-toast { left: 8px; top: auto; bottom: -10px; transform: none; }
+            @keyframes toastIn {
+                0%   { opacity: 0; transform: translateY(10px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+        }
+        @media (max-width: 480px) {
+            .live-toast { display: none; }
+            .hero-visual::before { display: none; }
+        }
+
+        /* KPI callout pointing at 87% */
+        .kpi-callout {
+            position: absolute;
+            top: -18px; right: -14px;
+            background: var(--brand-ink);
+            color: #fff;
+            font-family: 'Roboto Mono', ui-monospace, monospace;
+            font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+            padding: 8px 12px;
+            border-radius: 10px;
+            box-shadow: 0 14px 30px -14px rgba(0, 11, 51, 0.5);
+            z-index: 3;
+            white-space: nowrap;
+        }
+        .kpi-callout::after {
+            content: '';
+            position: absolute;
+            bottom: -6px; left: 22px;
+            width: 0; height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 7px solid var(--brand-ink);
+        }
+        .kpi-callout .dot {
+            display: inline-block;
+            width: 6px; height: 6px; border-radius: 999px;
+            background: var(--brand-coral);
+            margin-right: 6px; vertical-align: 1px;
+        }
+        @media (max-width: 480px) { .kpi-callout { display: none; } }
     </style>
 </head>
 
@@ -387,46 +686,69 @@
 
     <main id="top" class="w-full">
         <!-- ============================== 1. HERO ============================== -->
-        <section class="hero-gradient mesh-bg pt-28 pb-14 md:pt-36 md:pb-20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                    <div class="lg:col-span-6 text-center lg:text-left animate-slide-up">
-                        <span class="pill pill-cyan mb-5">
-                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>
-                            Plataforma SaaS B2B · Cumplimiento legal
+        <section class="hero-redux pt-28 pb-16 md:pt-36 md:pb-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+                    <div class="lg:col-span-7 relative animate-slide-up">
+                        <span class="hero-eyebrow mb-6">
+                            <span class="num">01</span>
+                            <span class="sep">—</span>
+                            <span>Datasheq · Cumplimiento legal SaaS</span>
                         </span>
-                        <h1 class="headline-display text-[34px] sm:text-5xl lg:text-[58px] text-slate-900 mb-5">
-                            <span class="heavy">Transforma la complejidad legal</span>
-                            <span class="block thin mt-2">en verificaciones inteligentes</span>
-                            <span class="block heavy bg-gradient-to-r from-brand-sky via-brand-blue to-brand-navy bg-clip-text text-transparent">y automatizadas.</span>
+
+                        <h1 class="hero-headline mb-6">
+                            Tu cumplimiento legal,<br/>
+                            <span class="serif-accent">sin papeles</span>
+                            <span class="light">ni planillas</span>
+                            <span class="accent-coral">.</span>
                         </h1>
-                        <p class="text-base md:text-lg text-slate-600 leading-relaxed mb-7 max-w-xl mx-auto lg:mx-0">
-                            Deja atrás la complejidad del cumplimiento manual y descubre una forma más simple de gestionar verificaciones legales, control documental y seguimiento operativo.
+
+                        <p class="text-base md:text-lg leading-relaxed mb-8 max-w-xl" style="color: var(--brand-body);">
+                            Verificaciones legales digitales, control documental y trazabilidad operativa —
+                            <strong style="color: var(--brand-ink); font-weight: 700;">en una sola plataforma</strong>
+                            diseñada para empresas chilenas modernas.
                         </p>
-                        <div class="flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start mb-7">
-                            <a href="/form" class="btn-primary w-full sm:w-auto">
+
+                        <div class="hero-cta-row mb-7">
+                            <a href="/form" class="btn-primary">
                                 Solicita más información
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </a>
-                            <a href="#solucion" class="btn-secondary w-full sm:w-auto">
-                                Ver solución
+                            <a href="#solucion" class="hero-link">
+                                Ver cómo funciona
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
                             </a>
+                            <span class="hero-cta-note">Sin compromiso · responde en 24h</span>
                         </div>
-                        <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
-                            <span class="pill pill-sky">Automatización</span>
-                            <span class="pill pill-cyan">Control documental</span>
-                            <span class="pill pill-navy">Trazabilidad</span>
-                            <span class="pill pill-emerald">Móvil first</span>
+
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <span class="hero-live">
+                                <span class="pulse"></span>
+                                Monitoreando <span class="num-display">128</span> verificaciones esta semana
+                            </span>
+                        </div>
+
+                        <div class="codes-strip">
+                            <p class="codes-strip-label">Legislación cubierta · Chile</p>
+                            <div class="codes-track">
+                                <span class="code-chip"><span class="marker"></span>DS 594</span>
+                                <span class="code-chip"><span class="marker"></span>Ley 16.744</span>
+                                <span class="code-chip"><span class="marker"></span>RES 1433</span>
+                                <span class="code-chip"><span class="marker"></span>NCh ISO 45001</span>
+                                <span class="code-chip"><span class="marker"></span>DS 40</span>
+                                <span class="code-chip"><span class="marker"></span>DS 76</span>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Hero visual: dashboard mockup -->
-                    <div class="lg:col-span-6 animate-fade-in">
+                    <div class="lg:col-span-5 hero-visual animate-fade-in">
                         <div class="relative">
-                            <div class="absolute -inset-6 bg-gradient-to-br from-brand-aqua/30 via-brand-sky/20 to-brand-navy/20 rounded-[40px] blur-3xl"></div>
+                            <span class="kpi-callout"><span class="dot"></span>+4.2% este mes</span>
+                            <div class="absolute -inset-6 bg-gradient-to-br from-brand-coral/20 via-brand-purple/15 to-brand-night/10 rounded-[40px] blur-3xl"></div>
                             <div class="relative grid grid-cols-12 gap-3">
                                 <!-- Main dashboard mock -->
-                                <div class="col-span-12 md:col-span-8 mock-window">
+                                <div class="col-span-12 mock-window">
                                     <div class="mock-bar">
                                         <span class="mock-dot bg-red-300"></span>
                                         <span class="mock-dot bg-amber-300"></span>
@@ -437,7 +759,7 @@
                                         <div class="flex items-center justify-between mb-4">
                                             <div>
                                                 <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Cumplimiento global</p>
-                                                <p class="text-2xl font-extrabold text-slate-900 mt-1">87%</p>
+                                                <p class="text-3xl num-display text-slate-900 mt-1">87%</p>
                                             </div>
                                             <span class="pill pill-emerald">+4.2% mes</span>
                                         </div>
@@ -458,23 +780,23 @@
                                         <div class="grid grid-cols-3 gap-2">
                                             <div class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-center">
                                                 <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Verif.</p>
-                                                <p class="text-lg font-extrabold text-slate-900">128</p>
+                                                <p class="text-lg num-display text-slate-900">128</p>
                                             </div>
                                             <div class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-center">
                                                 <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Pendientes</p>
-                                                <p class="text-lg font-extrabold text-amber-600">14</p>
+                                                <p class="text-lg num-display text-amber-600">14</p>
                                             </div>
                                             <div class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-center">
                                                 <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Críticas</p>
-                                                <p class="text-lg font-extrabold text-rose-600">3</p>
+                                                <p class="text-lg num-display text-rose-600">3</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Mobile mock -->
-                                <div class="col-span-12 md:col-span-4 mock-window md:translate-y-6">
+                                <div class="col-span-12 md:col-span-7 mock-window">
                                     <div class="mock-bar">
-                                        <span class="mock-bar-label">📱 App móvil</span>
+                                        <span class="mock-bar-label">App móvil · terreno</span>
                                     </div>
                                     <div class="p-4 space-y-2.5">
                                         <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500 mb-1">Checklist en terreno</p>
@@ -497,34 +819,42 @@
                                     </div>
                                 </div>
                                 <!-- Matriz legal mock -->
-                                <div class="col-span-12 mock-window">
+                                <div class="col-span-12 md:col-span-5 mock-window">
                                     <div class="p-4">
                                         <div class="flex items-center justify-between mb-3">
-                                            <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Matriz legal · Responsables y evidencia</p>
-                                            <span class="pill pill-navy">Tiempo real</span>
+                                            <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Matriz legal</p>
+                                            <span class="pill pill-navy !py-0 !px-2 !text-[9px]">Tiempo real</span>
                                         </div>
-                                        <div class="grid grid-cols-4 gap-2 text-[11px]">
-                                            <div class="font-bold text-slate-500 uppercase">Cuerpo legal</div>
-                                            <div class="font-bold text-slate-500 uppercase">Resp.</div>
-                                            <div class="font-bold text-slate-500 uppercase">Frec.</div>
-                                            <div class="font-bold text-slate-500 uppercase">Estado</div>
-
-                                            <div class="font-semibold text-slate-700 truncate">DS 594</div>
-                                            <div class="text-slate-500">P. Soto</div>
-                                            <div class="text-slate-500">Mensual</div>
-                                            <div><span class="pill pill-emerald !py-0 !px-2 !text-[10px]">OK</span></div>
-
-                                            <div class="font-semibold text-slate-700 truncate">Ley 16.744</div>
-                                            <div class="text-slate-500">M. Reyes</div>
-                                            <div class="text-slate-500">Trimestral</div>
-                                            <div><span class="pill pill-cyan !py-0 !px-2 !text-[10px]">En curso</span></div>
-
-                                            <div class="font-semibold text-slate-700 truncate">RES 1433</div>
-                                            <div class="text-slate-500">A. Vidal</div>
-                                            <div class="text-slate-500">Anual</div>
-                                            <div><span class="pill pill-sky !py-0 !px-2 !text-[10px]">Próximo</span></div>
+                                        <div class="space-y-2 text-[11px]">
+                                            <div class="flex items-center justify-between gap-2">
+                                                <span class="font-semibold text-slate-700 truncate" style="font-family: 'Roboto Mono', ui-monospace, monospace;">DS 594</span>
+                                                <span class="pill pill-emerald !py-0 !px-2 !text-[9px]">OK</span>
+                                            </div>
+                                            <div class="flex items-center justify-between gap-2">
+                                                <span class="font-semibold text-slate-700 truncate" style="font-family: 'Roboto Mono', ui-monospace, monospace;">Ley 16.744</span>
+                                                <span class="pill pill-cyan !py-0 !px-2 !text-[9px]">En curso</span>
+                                            </div>
+                                            <div class="flex items-center justify-between gap-2">
+                                                <span class="font-semibold text-slate-700 truncate" style="font-family: 'Roboto Mono', ui-monospace, monospace;">RES 1433</span>
+                                                <span class="pill pill-sky !py-0 !px-2 !text-[9px]">Próximo</span>
+                                            </div>
+                                            <div class="flex items-center justify-between gap-2">
+                                                <span class="font-semibold text-slate-700 truncate" style="font-family: 'Roboto Mono', ui-monospace, monospace;">DS 40</span>
+                                                <span class="pill pill-emerald !py-0 !px-2 !text-[9px]">OK</span>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating live-alert toast -->
+                            <div class="live-toast" aria-hidden="true">
+                                <span class="toast-icon">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <div>
+                                    <p class="toast-title">Nueva verificación completa</p>
+                                    <p class="toast-sub">Hace 2 min · P. Soto</p>
                                 </div>
                             </div>
                         </div>
