@@ -651,14 +651,303 @@
             margin-right: 6px; vertical-align: 1px;
         }
         @media (max-width: 480px) { .kpi-callout { display: none; } }
+
+        /* ──────────────────────────────────────────────────────────────
+           MOBILE NAV (hamburger + dropdown)
+           Desktop (≥ md / 768px) is completely unaffected.
+           ────────────────────────────────────────────────────────────── */
+        .nav-burger {
+            display: none;
+            width: 44px; height: 44px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.7);
+            border: 1px solid var(--brand-line);
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-ink);
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .nav-burger:active { transform: scale(0.96); }
+        .nav-burger:focus-visible { outline: 2px solid var(--brand-purple); outline-offset: 2px; }
+        .burger-bars { position: relative; width: 20px; height: 14px; display: inline-block; }
+        .burger-bars > span {
+            position: absolute; left: 0; right: 0; height: 2px; border-radius: 2px;
+            background: var(--brand-ink);
+            transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+        }
+        .burger-bars > span:nth-child(1) { top: 0; }
+        .burger-bars > span:nth-child(2) { top: 6px; }
+        .burger-bars > span:nth-child(3) { top: 12px; }
+        .nav-burger[aria-expanded="true"] .burger-bars > span:nth-child(1) { top: 6px; transform: rotate(45deg); }
+        .nav-burger[aria-expanded="true"] .burger-bars > span:nth-child(2) { opacity: 0; }
+        .nav-burger[aria-expanded="true"] .burger-bars > span:nth-child(3) { top: 6px; transform: rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            overflow: hidden;
+            max-height: 0;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(14px) saturate(1.1);
+            -webkit-backdrop-filter: blur(14px) saturate(1.1);
+            border-bottom: 1px solid transparent;
+            transition: max-height 0.32s ease, border-color 0.2s ease;
+        }
+        .mobile-menu[data-open="true"] {
+            max-height: 90vh;
+            border-bottom-color: var(--brand-line);
+        }
+        .mobile-menu-inner {
+            display: flex; flex-direction: column;
+            padding: 8px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+            gap: 2px;
+        }
+        .mobile-menu-link {
+            display: flex; align-items: center;
+            min-height: 52px;
+            padding: 0 4px;
+            font-size: 17px; font-weight: 700;
+            color: var(--brand-ink);
+            border-bottom: 1px solid var(--brand-line);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .mobile-menu-link:last-of-type { border-bottom: 0; }
+        .mobile-menu-link:active { color: var(--brand-purple); }
+        .mobile-menu-cta {
+            margin-top: 14px;
+            width: 100%;
+            padding: 16px 22px !important;
+            font-size: 16px !important;
+        }
+        .mobile-menu-note {
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--brand-muted);
+            text-align: center;
+        }
+        .nav-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(16, 16, 42, 0.35);
+            z-index: 40;
+            border: 0; padding: 0;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            cursor: pointer;
+        }
+        .nav-overlay.is-visible { opacity: 1; }
+
+        /* Show mobile chrome only below md */
+        @media (max-width: 767px) {
+            .nav-burger { display: inline-flex; }
+            .mobile-menu { display: block; }
+            #site-nav[data-menu-open="true"] ~ .nav-overlay { display: block; }
+        }
+
+        /* ──────────────────────────────────────────────────────────────
+           MOBILE-FIRST OVERRIDES (≤ 767px)
+           Scoped strictly inside (max-width: 767px) so the desktop
+           layout remains pixel-identical above this breakpoint.
+           ────────────────────────────────────────────────────────────── */
+        @media (max-width: 767px) {
+            /* Slightly shorter nav bar to reclaim vertical space */
+            #site-nav .nav-row { height: 64px; }
+
+            /* ── Hero ── */
+            .hero-redux {
+                padding-top: 84px !important;
+                padding-bottom: 28px !important;
+            }
+            .hero-redux::before { display: none; } /* drop pinstripe noise */
+            .hero-eyebrow {
+                font-size: 10px;
+                padding: 6px 12px;
+                margin-bottom: 18px !important;
+            }
+            .hero-headline {
+                font-size: clamp(34px, 9vw, 44px) !important;
+                line-height: 1.04 !important;
+                letter-spacing: -0.03em !important;
+                margin-bottom: 16px !important;
+            }
+            .hero-headline .serif-accent::after { height: 9px; bottom: -0.04em; }
+            .hero-redux p.text-base {
+                font-size: 16px !important;
+                line-height: 1.55 !important;
+                margin-bottom: 22px !important;
+            }
+
+            /* CTA row: stack, full-width primary, link secondary, note below */
+            .hero-cta-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px !important;
+                margin-bottom: 18px !important;
+            }
+            .hero-cta-row .btn-primary {
+                width: 100%;
+                padding: 16px 22px;
+                font-size: 16px;
+                min-height: 52px;
+            }
+            .hero-cta-row .hero-link {
+                justify-content: center;
+                padding: 12px 4px;
+                min-height: 44px;
+            }
+            .hero-cta-row .hero-link::after { display: none; }
+            .hero-cta-note {
+                justify-content: center;
+                font-size: 12px;
+            }
+            .hero-cta-note::before { display: none; }
+
+            /* Live pulse strip stays small but lighter */
+            .hero-live { font-size: 11px; padding: 6px 12px 6px 10px; }
+
+            /* Legal codes: horizontal scroll instead of wrap (cleaner) */
+            .codes-strip { margin-top: 14px; padding: 10px 0; }
+            .codes-strip-label { margin-bottom: 6px; }
+            .codes-track {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 8px;
+                padding-bottom: 4px;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+                mask-image: linear-gradient(90deg, #000 92%, transparent 100%);
+                -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent 100%);
+            }
+            .codes-track::-webkit-scrollbar { display: none; }
+            .code-chip { flex-shrink: 0; }
+
+            /* Hero visual: simplify — keep only main dashboard mock */
+            .hero-visual { margin-top: 28px; }
+            .hero-visual::before { display: none; }
+            .hero-visual .absolute.-inset-6 { display: none; } /* heavy blur gradient */
+            .hero-mock-secondary { display: none !important; }
+            .hero-visual .mock-window { box-shadow: 0 18px 36px -22px rgba(0, 11, 51, 0.18); }
+
+            /* ── Generic section padding on mobile ── */
+            main > section { padding-top: 44px; padding-bottom: 44px; }
+            main > section:first-of-type { padding-top: 84px; } /* hero already overridden but safety */
+            /* Trust bar slimmer */
+            main > section.py-7 { padding-top: 28px; padding-bottom: 28px; }
+
+            /* Section headings */
+            section h2.text-3xl,
+            section h2 {
+                font-size: 28px !important;
+                line-height: 1.15 !important;
+                letter-spacing: -0.02em;
+            }
+            section .pill { font-size: 10px; }
+
+            /* ── Trust bar ── */
+            section .grid.grid-cols-2.md\:grid-cols-4 > div p.text-3xl {
+                font-size: 26px;
+            }
+
+            /* ── Feature cards / benefits / bento ── */
+            .feat-card { padding: 20px; border-radius: 18px; }
+            .feat-card h3 { font-size: 17px !important; }
+            .feat-card p { font-size: 14px !important; }
+            .feat-icon { width: 40px; height: 40px; border-radius: 11px; }
+
+            /* Benefits: force single column on small mobile for clean scanning */
+            #beneficios .grid.sm\:grid-cols-2 { grid-template-columns: 1fr !important; }
+            .benefit { padding: 14px; border-radius: 14px; }
+            .benefit p.font-bold { font-size: 14px; }
+            .benefit p.text-xs { font-size: 13px !important; }
+
+            /* Solución bento cards: single column, tighter */
+            #solucion .grid.sm\:grid-cols-2 { grid-template-columns: 1fr !important; }
+            #solucion .bento { padding: 18px !important; }
+
+            /* ── Plans / pricing ── */
+            .plan-card { padding: 22px; border-radius: 20px; }
+            .plan-card h3 { font-size: 22px !important; }
+            .plan-card ul li { font-size: 14px; }
+            /* Featured plan: bring forward (first) on mobile so the recommended plan is seen first */
+            #planes .grid { row-gap: 14px; }
+            #planes .plan-card.is-featured { order: -1; }
+
+            /* ── Transformación dark card ── */
+            section .bento-dark { padding: 24px !important; border-radius: 20px; }
+            section .bento-dark h2 { color: #fff !important; font-size: 26px !important; }
+            section .bento-dark .grid.grid-cols-2 { grid-template-columns: 1fr 1fr; gap: 10px; }
+            section .bento-dark .grid.grid-cols-2 .rounded-2xl { padding: 14px; border-radius: 14px; }
+            section .bento-dark .grid.grid-cols-2 .font-bold { font-size: 14px; }
+
+            /* ── FAQ ── */
+            details.faq-item { padding: 16px; border-radius: 14px; }
+            details.faq-item summary { font-size: 15px; min-height: 32px; }
+            details.faq-item summary::after { font-size: 24px; }
+
+            /* ── Final CTA section: put CTA card FIRST on mobile for conversion ── */
+            .cta-grid { gap: 24px !important; }
+            .cta-card-col { order: -1; }
+            .cta-copy h2 { color: #fff !important; font-size: 28px !important; line-height: 1.12 !important; }
+            .cta-copy .flex.flex-wrap.gap-3 { flex-direction: column; gap: 10px; }
+            .cta-copy .flex.flex-wrap.gap-3 > a {
+                width: 100%;
+                justify-content: center;
+                min-height: 52px;
+                padding: 16px 22px;
+                font-size: 16px;
+            }
+            .cta-copy .grid.grid-cols-3 { grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 100%; }
+            .cta-copy .grid.grid-cols-3 p.text-2xl { font-size: 18px; }
+
+            .form-cta-card { padding: 22px; border-radius: 20px; }
+            .form-cta-card h3 { font-size: 22px !important; }
+            .form-cta-card .btn-primary {
+                width: 100%; padding: 16px 22px;
+                font-size: 16px; min-height: 52px;
+            }
+
+            /* ── Footer ── */
+            footer .flex.flex-col.md\:flex-row { gap: 28px; }
+            footer .grid.grid-cols-2.sm\:grid-cols-3 {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+            footer p.text-sm { font-size: 14px; }
+
+            /* ── Sticky mobile CTA: comfortable size, no oversized push ── */
+            .sticky-mobile-cta {
+                padding: 14px 22px !important;
+                font-size: 15px !important;
+                min-height: 52px;
+                border-radius: 999px;
+            }
+            body { padding-bottom: 84px; }
+
+            /* Ensure interactive tap targets meet ≥44px */
+            a.hero-link, footer a, .mobile-menu-link { min-height: 44px; }
+
+            /* Smooth any decorative motion-heavy elements */
+            .reveal { transition-duration: 0.4s; }
+        }
+
+        /* Even tighter on very small screens */
+        @media (max-width: 380px) {
+            .hero-headline { font-size: 30px !important; }
+            section h2 { font-size: 24px !important; }
+            .plan-card h3 { font-size: 20px !important; }
+            footer .grid.grid-cols-2.sm\:grid-cols-3 { grid-template-columns: 1fr; }
+        }
+
+        /* Lock body scroll when mobile menu open */
+        body.menu-open { overflow: hidden; }
     </style>
 </head>
 
 <body class="min-h-screen bg-slate-50 text-slate-900 overflow-x-hidden">
     <!-- ============================== NAV ============================== -->
-    <nav class="fixed w-full z-50 transition-all duration-300 glass-nav bg-white/80 border-b border-slate-200">
+    <nav id="site-nav" class="fixed w-full z-50 transition-all duration-300 glass-nav bg-white/80 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-20 md:h-20 nav-row">
                 <a href="#top" class="flex items-center gap-2.5">
                     <span class="logo-mark">
                         <img src="/logo.png" alt="datasheq">
@@ -674,10 +963,30 @@
                         Solicita más información
                     </a>
                 </div>
-                <a href="/form" class="md:hidden text-sm font-bold text-brand-blue">Contacto →</a>
+                <!-- Mobile hamburger trigger (replaces previous "Contacto →" link) -->
+                <button id="nav-toggle" type="button" class="md:hidden nav-burger" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú">
+                    <span class="burger-bars" aria-hidden="true">
+                        <span></span><span></span><span></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile drop-down menu (only rendered on mobile via CSS) -->
+        <div id="mobile-menu" class="mobile-menu" data-open="false" aria-hidden="true">
+            <div class="mobile-menu-inner">
+                <a href="#funcionalidades" class="mobile-menu-link" data-mm-link>Funcionalidades</a>
+                <a href="#solucion" class="mobile-menu-link" data-mm-link>Solución</a>
+                <a href="#beneficios" class="mobile-menu-link" data-mm-link>Beneficios</a>
+                <a href="#planes" class="mobile-menu-link" data-mm-link>Planes</a>
+                <a href="/form" class="btn-primary mobile-menu-cta">
+                    Solicita más información
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+                <p class="mobile-menu-note">Respondemos en menos de 24h hábiles · sin compromiso</p>
             </div>
         </div>
     </nav>
+    <button type="button" id="nav-overlay" class="nav-overlay" aria-hidden="true" tabindex="-1"></button>
 
     <main id="top" class="w-full">
         <!-- ============================== 1. HERO ============================== -->
@@ -789,7 +1098,7 @@
                                     </div>
                                 </div>
                                 <!-- Mobile mock -->
-                                <div class="col-span-12 md:col-span-7 mock-window">
+                                <div class="col-span-12 md:col-span-7 mock-window hero-mock-secondary">
                                     <div class="mock-bar">
                                         <span class="mock-bar-label">App móvil · terreno</span>
                                     </div>
@@ -814,7 +1123,7 @@
                                     </div>
                                 </div>
                                 <!-- Matriz legal mock -->
-                                <div class="col-span-12 md:col-span-5 mock-window">
+                                <div class="col-span-12 md:col-span-5 mock-window hero-mock-secondary">
                                     <div class="p-4">
                                         <div class="flex items-center justify-between mb-3">
                                             <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Matriz legal</p>
@@ -1170,8 +1479,8 @@
         <!-- ============================== 7. CTA FINAL + FORMULARIO ============================== -->
         <section id="contacto" class="py-16 md:py-24 bg-gradient-to-br from-brand-ink via-brand-night to-brand-navy text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                    <div class="lg:col-span-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start cta-grid">
+                    <div class="lg:col-span-6 cta-copy">
                         <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-brand-mint text-[11px] font-bold uppercase tracking-[0.14em] mb-5">Comencemos</span>
                         <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.05] mb-5">Comienza a digitalizar tus procesos legales y operativos.</h2>
                         <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-8 max-w-xl">
@@ -1200,7 +1509,7 @@
                     </div>
 
                     <!-- ── CTA card linking to /form ── -->
-                    <div class="lg:col-span-6">
+                    <div class="lg:col-span-6 cta-card-col">
                         <div class="form-cta-card">
                             <span class="pill pill-sky mb-4">Solicitar información</span>
                             <h3 class="text-2xl md:text-3xl font-extrabold mb-3" style="color:var(--brand-ink);">Cuéntanos sobre tu operación.</h3>
@@ -1339,6 +1648,62 @@
                 window.scrollTo({ top: top, behavior: 'smooth' });
             });
         });
+
+        // ── Mobile menu (hamburger) ──
+        (function () {
+            var nav      = document.getElementById('site-nav');
+            var toggle   = document.getElementById('nav-toggle');
+            var menu     = document.getElementById('mobile-menu');
+            var overlay  = document.getElementById('nav-overlay');
+            if (!nav || !toggle || !menu) return;
+
+            function setOpen(open) {
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+                menu.setAttribute('data-open', open ? 'true' : 'false');
+                menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+                nav.setAttribute('data-menu-open', open ? 'true' : 'false');
+                document.body.classList.toggle('menu-open', open);
+                if (overlay) {
+                    if (open) {
+                        overlay.style.display = 'block';
+                        // Next frame to allow transition.
+                        requestAnimationFrame(function () { overlay.classList.add('is-visible'); });
+                    } else {
+                        overlay.classList.remove('is-visible');
+                        setTimeout(function () { overlay.style.display = ''; }, 250);
+                    }
+                }
+            }
+
+            toggle.addEventListener('click', function () {
+                var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+                setOpen(!isOpen);
+            });
+
+            // Close on link click
+            menu.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', function () { setOpen(false); });
+            });
+
+            // Close on overlay click
+            if (overlay) overlay.addEventListener('click', function () { setOpen(false); });
+
+            // Close on Escape
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+                    setOpen(false);
+                    toggle.focus();
+                }
+            });
+
+            // Close if resizing up to desktop
+            window.addEventListener('resize', function () {
+                if (window.innerWidth >= 768 && toggle.getAttribute('aria-expanded') === 'true') {
+                    setOpen(false);
+                }
+            });
+        })();
     </script>
 </body>
 </html>
