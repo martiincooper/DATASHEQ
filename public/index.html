@@ -153,6 +153,10 @@
         .pill-cyan    { background: rgba(88, 32, 220, 0.10); color: #3a16a3; border: 1px solid rgba(88, 32, 220, 0.22); }
         .pill-navy    { background: rgba(16, 16, 42, 0.06); color: #10102A; border: 1px solid rgba(16, 16, 42, 0.18); }
         .pill-emerald { background: rgba(253, 76, 92, 0.10); color: #c2293a; border: 1px solid rgba(253, 76, 92, 0.24); }
+        /* Semantic status pills (used in the Matriz Legal mock) */
+        .pill-status-ok       { background: rgba(16, 185, 129, 0.12); color: #047857; border: 1px solid rgba(16, 185, 129, 0.28); }
+        .pill-status-progress { background: rgba(245, 158, 11, 0.14); color: #b45309; border: 1px solid rgba(245, 158, 11, 0.32); }
+        .pill-status-upcoming { background: rgba(14, 165, 233, 0.12); color: #0369a1; border: 1px solid rgba(14, 165, 233, 0.30); }
 
         /* ──── Buttons ──── */
         .btn-primary {
@@ -1129,22 +1133,26 @@
                                             <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Matriz legal</p>
                                             <span class="pill pill-navy !py-0 !px-2 !text-[9px]">Tiempo real</span>
                                         </div>
-                                        <div class="space-y-2 text-[11px]">
-                                            <div class="flex items-center justify-between gap-2">
-                                                <span class="font-semibold text-slate-700 truncate" style="font-family: 'Roboto Mono', ui-monospace, monospace;">DS 594</span>
-                                                <span class="pill pill-emerald !py-0 !px-2 !text-[9px]">OK</span>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center gap-2 p-2 rounded-lg bg-emerald-50 border border-emerald-100">
+                                                <span class="w-5 h-5 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold shrink-0">✓</span>
+                                                <span class="text-xs font-semibold text-slate-700 truncate flex-1" style="font-family: 'Roboto Mono', ui-monospace, monospace;">DS 594</span>
+                                                <span class="pill pill-status-ok !py-0 !px-2 !text-[9px]">OK</span>
                                             </div>
-                                            <div class="flex items-center justify-between gap-2">
-                                                <span class="font-semibold text-slate-700 truncate" style="font-family: 'Roboto Mono', ui-monospace, monospace;">Ley 16.744</span>
-                                                <span class="pill pill-cyan !py-0 !px-2 !text-[9px]">En curso</span>
+                                            <div class="flex items-center gap-2 p-2 rounded-lg bg-amber-50 border border-amber-100">
+                                                <span class="w-5 h-5 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center font-bold shrink-0">!</span>
+                                                <span class="text-xs font-semibold text-slate-700 truncate flex-1" style="font-family: 'Roboto Mono', ui-monospace, monospace;">Ley 16.744</span>
+                                                <span class="pill pill-status-progress !py-0 !px-2 !text-[9px]">En curso</span>
                                             </div>
-                                            <div class="flex items-center justify-between gap-2">
-                                                <span class="font-semibold text-slate-700 truncate" style="font-family: 'Roboto Mono', ui-monospace, monospace;">RES 1433</span>
-                                                <span class="pill pill-sky !py-0 !px-2 !text-[9px]">Próximo</span>
+                                            <div class="flex items-center gap-2 p-2 rounded-lg bg-sky-50 border border-sky-100">
+                                                <span class="w-5 h-5 rounded-full bg-sky-500 text-white text-xs flex items-center justify-center font-bold shrink-0">»</span>
+                                                <span class="text-xs font-semibold text-slate-700 truncate flex-1" style="font-family: 'Roboto Mono', ui-monospace, monospace;">RES 1433</span>
+                                                <span class="pill pill-status-upcoming !py-0 !px-2 !text-[9px]">Próximo</span>
                                             </div>
-                                            <div class="flex items-center justify-between gap-2">
-                                                <span class="font-semibold text-slate-700 truncate" style="font-family: 'Roboto Mono', ui-monospace, monospace;">DS 40</span>
-                                                <span class="pill pill-emerald !py-0 !px-2 !text-[9px]">OK</span>
+                                            <div class="flex items-center gap-2 p-2 rounded-lg bg-emerald-50 border border-emerald-100">
+                                                <span class="w-5 h-5 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold shrink-0">✓</span>
+                                                <span class="text-xs font-semibold text-slate-700 truncate flex-1" style="font-family: 'Roboto Mono', ui-monospace, monospace;">DS 40</span>
+                                                <span class="pill pill-status-ok !py-0 !px-2 !text-[9px]">OK</span>
                                             </div>
                                         </div>
                                     </div>
