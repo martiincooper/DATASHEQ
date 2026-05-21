@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar información — Datasheq</title>
+    <meta name="description" content="Solicita más información sobre Datasheq. Responde 5 preguntas rápidas y te contactamos con el plan que mejor se adapte a tu equipo.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://datasheq.com/form">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ink:     '#000B33',
+                            night:   '#10102A',
+                            navy:    '#10102A',
+                            blue:    '#C200FF',
+                            sky:     '#C200FF',
+                            cyan:    '#5820DC',
+                            aqua:    '#FD4C5C',
+                            mint:    '#FD4C5C',
+                            slate:   'rgba(0, 11, 51, 0.78)',
+                            line:    '#e6e8f1',
+                            coral:   '#FD4C5C',
+                            purple:  '#C200FF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"HK Grotesk"', '"Hanken Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
+                        slab: ['"Roboto Slab"', 'Georgia', 'serif'],
+                        ui:   ['"Roboto"', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet">
+    </noscript>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        :root {
+            --brand-ink:        #000B33;
+            --brand-body:       rgba(0, 11, 51, 0.78);
+            --brand-muted:      rgba(0, 11, 51, 0.58);
+            --brand-line:       #e6e8f1;
+            --brand-purple:     #C200FF;
+            --brand-purple-hov: #5820DC;
+            --brand-coral:      #FD4C5C;
+            --brand-dark:       #10102A;
+        }
+
+        body {
+            color: var(--brand-body);
+            background:
+                radial-gradient(900px 460px at 88% 6%, rgba(194, 0, 255, 0.10), transparent 60%),
+                radial-gradient(720px 380px at -6% 18%, rgba(253, 76, 92, 0.10), transparent 60%),
+                #ffffff;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 { color: var(--brand-ink); letter-spacing: -0.01em; }
+
+        /* Logo mark */
+        .logo-mark {
+            width: 32px; height: 32px; border-radius: 10px;
+            background: linear-gradient(135deg, #C200FF 0%, #5820DC 60%, #10102A 100%);
+            display: inline-flex; align-items: center; justify-content: center;
+            color: #fff;
+            box-shadow: 0 6px 16px -8px rgba(194, 0, 255, 0.6);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 14px 26px; border-radius: 999px;
+            background: #C200FF;
+            color: #fff; font-weight: 700; font-size: 15px;
+            box-shadow: 0 14px 30px -12px rgba(194, 0, 255, 0.55);
+            transition: background-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+            border: 0;
+            cursor: pointer;
+        }
+        .btn-primary:hover:not(:disabled) {
+            background: #5820DC;
+            transform: translateY(-1px);
+            box-shadow: 0 18px 36px -12px rgba(88, 32, 220, 0.55);
+        }
+        .btn-primary:focus-visible { outline: 2px solid #C200FF; outline-offset: 3px; }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-secondary {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 13px 22px; border-radius: 999px;
+            background: #fff; color: var(--brand-ink); font-weight: 700; font-size: 15px;
+            border: 1.5px solid var(--brand-line);
+            transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+            cursor: pointer;
+        }
+        .btn-secondary:hover { border-color: #C200FF; color: #5820DC; transform: translateY(-1px); }
+        .btn-link {
+            background: none; border: 0; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px;
+            color: var(--brand-muted); font-weight: 700; font-size: 14px;
+            padding: 10px 6px;
+        }
+        .btn-link:hover { color: var(--brand-ink); }
+
+        .pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 12px; border-radius: 999px;
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.06em; text-transform: uppercase;
+            background: rgba(194, 0, 255, 0.10);
+            color: #6b00b3;
+            border: 1px solid rgba(194, 0, 255, 0.22);
+        }
+
+        /* Card */
+        .form-card {
+            background: rgba(255, 255, 255, 0.97);
+            border: 1px solid var(--brand-line);
+            border-radius: 24px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 1),
+                0 30px 60px -28px rgba(0, 11, 51, 0.25),
+                0 12px 28px -16px rgba(194, 0, 255, 0.20);
+            padding: 24px;
+        }
+        @media (min-width: 768px) { .form-card { padding: 36px; } }
+
+        /* Stepper */
+        .stepper {
+            display: flex; align-items: center; gap: 8px;
+            margin-bottom: 22px;
+        }
+        .stepper .dot {
+            flex: 1; height: 6px; border-radius: 999px;
+            background: var(--brand-line);
+            transition: background 0.3s ease;
+        }
+        .stepper .dot.is-active {
+            background: linear-gradient(90deg, #C200FF 0%, #5820DC 100%);
+        }
+        .step-counter {
+            display: flex; align-items: center; justify-content: space-between;
+            font-size: 12px; font-weight: 700; color: var(--brand-muted);
+            text-transform: uppercase; letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+
+        /* Steps */
+        .step { display: none; animation: stepIn 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+        .step.is-active { display: block; }
+        @keyframes stepIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .question {
+            font-size: 22px; line-height: 1.25;
+            font-weight: 800; letter-spacing: -0.01em;
+            color: var(--brand-ink);
+            margin-bottom: 6px;
+        }
+        @media (min-width: 768px) { .question { font-size: 26px; } }
+        .helper { font-size: 14px; color: var(--brand-muted); margin-bottom: 22px; }
+
+        /* Inputs */
+        .field { margin-bottom: 18px; }
+        .field-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--brand-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+        .input {
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            border: 1.5px solid var(--brand-line);
+            background: #fbfbff;
+            font-size: 16px; /* prevents iOS auto-zoom */
+            color: var(--brand-ink);
+            font-family: inherit;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+        }
+        .input:focus {
+            outline: none;
+            border-color: #C200FF;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(194, 0, 255, 0.18);
+        }
+        .input.is-error { border-color: #FD4C5C; box-shadow: 0 0 0 4px rgba(253, 76, 92, 0.15); }
+        .input.is-error:focus { border-color: #FD4C5C; box-shadow: 0 0 0 4px rgba(253, 76, 92, 0.20); }
+        textarea.input { resize: vertical; min-height: 110px; }
+
+        .error-msg {
+            display: none;
+            color: #c2293a; font-size: 13px; font-weight: 600;
+            margin-top: 8px;
+        }
+        .error-msg.is-visible { display: block; }
+
+        /* Option chips */
+        .options { display: grid; gap: 10px; margin-bottom: 8px; }
+        .option {
+            display: flex; align-items: center; gap: 12px;
+            width: 100%;
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: #fbfbff;
+            border: 1.5px solid var(--brand-line);
+            font-size: 15px; font-weight: 600; color: var(--brand-ink);
+            text-align: left;
+            font-family: inherit;
+            transition: border-color 0.18s ease, background 0.18s ease, transform 0.12s ease;
+            min-height: 56px;
+            cursor: pointer;
+        }
+        .option:hover { border-color: rgba(194,0,255,0.45); }
+        .option:active { transform: scale(0.99); }
+        .option .check {
+            flex-shrink: 0;
+            width: 22px; height: 22px;
+            border: 1.5px solid #c4c8da; background: #fff;
+            display: inline-flex; align-items: center; justify-content: center;
+            color: transparent;
+        }
+        .options[data-multi="false"] .option .check { border-radius: 999px; }
+        .options[data-multi="true"]  .option .check { border-radius: 7px; }
+        .option.is-selected {
+            border-color: #C200FF;
+            background: linear-gradient(180deg, rgba(194,0,255,0.08), rgba(88,32,220,0.05));
+        }
+        .option.is-selected .check {
+            background: linear-gradient(135deg, #C200FF, #5820DC);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        /* Step actions */
+        .step-actions {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 12px; margin-top: 22px;
+        }
+        .step-actions .btn-primary { min-width: 160px; }
+
+        /* Summary */
+        .summary {
+            display: grid; gap: 12px;
+            background: #fbfbff;
+            border: 1px solid var(--brand-line);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 18px;
+        }
+        .summary-row { display: grid; grid-template-columns: 1fr 1.4fr; gap: 12px; font-size: 14px; }
+        .summary-row dt { font-weight: 700; color: var(--brand-ink); margin: 0; }
+        .summary-row dd { margin: 0; color: var(--brand-body); }
+
+        /* Success */
+        .success {
+            text-align: center;
+            padding: 12px 4px 4px;
+        }
+        .success-icon {
+            width: 72px; height: 72px; border-radius: 999px;
+            background: linear-gradient(135deg, rgba(194,0,255,0.12), rgba(88,32,220,0.10));
+            color: #5820DC;
+            display: inline-flex; align-items: center; justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        /* Mobile spacing */
+        @media (max-width: 480px) {
+            .form-card { padding: 22px; border-radius: 20px; }
+            .question { font-size: 20px; }
+            .step-actions .btn-primary { width: 100%; min-width: 0; }
+            .step-actions { flex-direction: column-reverse; align-items: stretch; }
+            .step-actions .btn-link { align-self: flex-start; }
+        }
+
+        :focus-visible { outline: 2px solid #C200FF; outline-offset: 2px; border-radius: 4px; }
+    </style>
+</head>
+
+<body class="font-sans">
+    <header class="max-w-2xl mx-auto px-4 sm:px-6 pt-8 pb-6">
+        <a href="/" class="inline-flex items-center gap-2.5">
+            <span class="logo-mark">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 6h11a6 6 0 0 1 0 12H5V6z" fill="currentColor" opacity="0.9"/>
+                    <path d="M9 10l2 2 4-4" stroke="#000B33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </span>
+            <span class="font-extrabold text-xl tracking-tight" style="color:var(--brand-ink);">datasheq<span style="color:#C200FF;">.</span></span>
+        </a>
+    </header>
+
+    <main class="max-w-2xl mx-auto px-4 sm:px-6 pb-16">
+        <div class="mb-6">
+            <a href="/" class="btn-link" style="padding-left:0;">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                Volver al inicio
+            </a>
+        </div>
+
+        <div class="mb-6">
+            <span class="pill mb-3">Solicitar información</span>
+            <h1 class="text-2xl md:text-3xl font-extrabold mb-2">Cuéntanos sobre tu operación.</h1>
+            <p class="text-sm md:text-base" style="color:var(--brand-body);">5 preguntas rápidas. Te respondemos en menos de 24 horas hábiles.</p>
+        </div>
+
+        <div class="form-card">
+            <div class="step-counter">
+                <span data-step-current>Paso 1</span>
+                <span data-step-total>de 5</span>
+            </div>
+            <div class="stepper" id="stepper" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1">
+                <span class="dot is-active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+
+            <form id="lead-form" novalidate>
+                <!-- STEP 1: Identidad -->
+                <section class="step is-active" data-step="1">
+                    <h2 class="question">¿Cómo te llamas y dónde trabajas?</h2>
+                    <p class="helper">Solo lo usamos para contactarte; nunca compartimos tus datos.</p>
+
+                    <div class="field">
+                        <label class="field-label" for="f-name">Nombre y apellido</label>
+                        <input type="text" id="f-name" name="name" class="input" autocomplete="name" required placeholder="Ej. Camila Soto">
+                        <p class="error-msg" data-error-for="f-name">Por favor escribe tu nombre.</p>
+                    </div>
+
+                    <div class="field">
+                        <label class="field-label" for="f-company">Empresa</label>
+                        <input type="text" id="f-company" name="company" class="input" autocomplete="organization" required placeholder="Ej. Empresa SpA">
+                        <p class="error-msg" data-error-for="f-company">Por favor indica tu empresa.</p>
+                    </div>
+
+                    <div class="step-actions">
+                        <span></span>
+                        <button type="button" class="btn-primary" data-action="next">
+                            Continuar
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- STEP 2: Contacto -->
+                <section class="step" data-step="2">
+                    <h2 class="question">¿Cómo te contactamos?</h2>
+                    <p class="helper">Usaremos el correo corporativo como canal principal.</p>
+
+                    <div class="field">
+                        <label class="field-label" for="f-email">Email corporativo</label>
+                        <input type="email" id="f-email" name="email" class="input" autocomplete="email" required placeholder="tu@empresa.com">
+                        <p class="error-msg" data-error-for="f-email">Por favor ingresa un email válido.</p>
+                    </div>
+
+                    <div class="field">
+                        <label class="field-label" for="f-phone">Teléfono</label>
+                        <input type="tel" id="f-phone" name="phone" class="input" autocomplete="tel" required placeholder="+56 9 1234 5678">
+                        <p class="error-msg" data-error-for="f-phone">Por favor ingresa un teléfono.</p>
+                    </div>
+
+                    <div class="step-actions">
+                        <button type="button" class="btn-link" data-action="back">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                            Atrás
+                        </button>
+                        <button type="button" class="btn-primary" data-action="next">
+                            Continuar
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- STEP 3: Rol -->
+                <section class="step" data-step="3">
+                    <h2 class="question">¿Cuál es tu rol?</h2>
+                    <p class="helper">Selecciona la opción que mejor te describe.</p>
+
+                    <div class="options" data-multi="false" data-field="role">
+                        <button type="button" class="option" data-value="HSE">
+                            <span class="check"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                            HSE / Prevención
+                        </button>
+                        <button type="button" class="option" data-value="Legal">
+                            <span class="check"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                            Legal / Compliance
+                        </button>
+                        <button type="button" class="option" data-value="Operaciones">
+                            <span class="check"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                            Operaciones
+                        </button>
+                        <button type="button" class="option" data-value="Directivo">
+                            <span class="check"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                            Directivo (CEO, CTO, CFO)
+                        </button>
+                        <button type="button" class="option" data-value="Otro">
+                            <span class="check"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                            Otro
+                        </button>
+                    </div>
+                    <p class="error-msg" data-error-for="role">Por favor selecciona una opción.</p>
+
+                    <div class="step-actions">
+                        <button type="button" class="btn-link" data-action="back">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                            Atrás
+                        </button>
+                        <button type="button" class="btn-primary" data-action="next">
+                            Continuar
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- STEP 4: Plan -->
+                <section class="step" data-step="4">
+                    <h2 class="question">¿Qué plan te interesa?</h2>
+                    <p class="helper">Si no estás seguro, podemos recomendarte uno según tu operación.</p>
+
+                    <div class="options" data-multi="false" data-field="plan">
+                        <button type="button" class="option" data-value="Profesional">
+                            <span class="check"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                            Profesional
+                        </button>
+                        <button type="button" class="option" data-value="Empresa">
+                            <span class="check"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                            Empresa
+                        </button>
+                        <button type="button" class="option" data-value="Básico">
+                            <span class="check"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                            Básico
+                        </button>
+                        <button type="button" class="option" data-value="Libre">
+                            <span class="check"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                            Libre
+                        </button>
+                        <button type="button" class="option" data-value="No estoy seguro">
+                            <span class="check"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                            No estoy seguro
+                        </button>
+                    </div>
+                    <p class="error-msg" data-error-for="plan">Por favor selecciona una opción.</p>
+
+                    <div class="step-actions">
+                        <button type="button" class="btn-link" data-action="back">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                            Atrás
+                        </button>
+                        <button type="button" class="btn-primary" data-action="next">
+                            Continuar
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- STEP 5: Mensaje + Resumen -->
+                <section class="step" data-step="5">
+                    <h2 class="question">Cuéntanos brevemente tu necesidad.</h2>
+                    <p class="helper">Opcional. Mientras más detalle, mejor podemos prepararnos para conversar contigo.</p>
+
+                    <div class="field">
+                        <label class="field-label" for="f-message">Mensaje</label>
+                        <textarea id="f-message" name="message" class="input" placeholder="Ej. Necesitamos digitalizar verificaciones en 5 instalaciones."></textarea>
+                    </div>
+
+                    <dl class="summary" id="summary"></dl>
+
+                    <div class="step-actions">
+                        <button type="button" class="btn-link" data-action="back">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                            Atrás
+                        </button>
+                        <button type="submit" class="btn-primary" id="submit-btn">
+                            <span data-label-default>Enviar solicitud</span>
+                            <span data-label-loading style="display:none;">Enviando…</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                    </div>
+
+                    <p class="text-[12px] mt-4 leading-relaxed" style="color:var(--brand-muted);">
+                        Al enviar este formulario aceptas nuestros
+                        <a href="/terminos.html" class="underline hover:text-[#5820DC]">Términos</a> y la
+                        <a href="/privacidad.html" class="underline hover:text-[#5820DC]">Política de Privacidad</a>.
+                    </p>
+                </section>
+
+                <!-- SUCCESS -->
+                <section class="step" data-step="success">
+                    <div class="success">
+                        <span class="success-icon">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        </span>
+                        <h2 class="text-2xl font-extrabold mb-2">¡Solicitud recibida!</h2>
+                        <p class="text-sm md:text-base mb-6" style="color:var(--brand-body);">Gracias por tu interés. Esto es una vista previa de UI: en producción, nuestro equipo se pondría en contacto contigo en menos de 24 horas hábiles.</p>
+                        <a href="/" class="btn-secondary">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                            Volver al inicio
+                        </a>
+                    </div>
+                </section>
+            </form>
+        </div>
+
+        <p class="text-center text-xs mt-6" style="color:var(--brand-muted);">
+            © 2026 Datasheq. Todos los derechos reservados.
+        </p>
+    </main>
+
+    <script>
+        (function () {
+            const form  = document.getElementById('lead-form');
+            const steps = Array.from(form.querySelectorAll('.step[data-step]'));
+            const dots  = document.querySelectorAll('.stepper .dot');
+            const stepCurrent = document.querySelector('[data-step-current]');
+            const numericSteps = steps.filter(function (s) { return /^\d+$/.test(s.dataset.step); });
+            const totalSteps = numericSteps.length;
+            document.querySelector('[data-step-total]').textContent = 'de ' + totalSteps;
+
+            let currentIndex = 0; // index into numericSteps
+            const data = {};
+
+            function showStep(idx) {
+                steps.forEach(function (s) { s.classList.remove('is-active'); });
+                if (idx === 'success') {
+                    form.querySelector('[data-step="success"]').classList.add('is-active');
+                    return;
+                }
+                numericSteps[idx].classList.add('is-active');
+                dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i <= idx); });
+                stepCurrent.textContent = 'Paso ' + (idx + 1);
+                document.getElementById('stepper').setAttribute('aria-valuenow', String(idx + 1));
+                // Focus first input/option of the new step for keyboard users
+                const active = numericSteps[idx];
+                const firstField = active.querySelector('input, textarea, .option');
+                if (firstField) {
+                    setTimeout(function () { firstField.focus({ preventScroll: true }); }, 60);
+                }
+                // Smooth scroll the card into view on small screens
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            function showError(input, message) {
+                input.classList.add('is-error');
+                input.setAttribute('aria-invalid', 'true');
+                const id = input.id;
+                const err = form.querySelector('[data-error-for="' + id + '"]');
+                if (err) {
+                    if (message) err.textContent = message;
+                    err.classList.add('is-visible');
+                }
+            }
+
+            function clearError(input) {
+                input.classList.remove('is-error');
+                input.removeAttribute('aria-invalid');
+                const id = input.id;
+                const err = form.querySelector('[data-error-for="' + id + '"]');
+                if (err) err.classList.remove('is-visible');
+            }
+
+            function clearOptionError(field) {
+                const err = form.querySelector('[data-error-for="' + field + '"]');
+                if (err) err.classList.remove('is-visible');
+            }
+
+            // Live-clear errors on typing
+            form.querySelectorAll('input, textarea').forEach(function (i) {
+                i.addEventListener('input', function () { clearError(i); });
+            });
+
+            function validateStep(idx) {
+                const step = numericSteps[idx];
+                let ok = true;
+
+                step.querySelectorAll('input[required], textarea[required]').forEach(function (input) {
+                    const v = input.value.trim();
+                    if (!v) {
+                        showError(input);
+                        ok = false;
+                        return;
+                    }
+                    if (input.type === 'email') {
+                        // Permissive but reasonable email check
+                        const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+                        if (!re.test(v)) {
+                            showError(input, 'Por favor ingresa un email válido.');
+                            ok = false;
+                            return;
+                        }
+                    }
+                    if (input.type === 'tel') {
+                        // Accept digits, spaces, +, -, parentheses; require at least 7 digits
+                        const digits = v.replace(/\D/g, '');
+                        if (digits.length < 7) {
+                            showError(input, 'Por favor ingresa un teléfono válido.');
+                            ok = false;
+                            return;
+                        }
+                    }
+                });
+
+                step.querySelectorAll('.options').forEach(function (group) {
+                    const field = group.dataset.field;
+                    if (!data[field]) {
+                        const err = form.querySelector('[data-error-for="' + field + '"]');
+                        if (err) err.classList.add('is-visible');
+                        ok = false;
+                    }
+                });
+
+                return ok;
+            }
+
+            function collectStep(idx) {
+                const step = numericSteps[idx];
+                step.querySelectorAll('input, textarea').forEach(function (input) {
+                    if (input.name) data[input.name] = input.value.trim();
+                });
+            }
+
+            // Option chip selection (single-choice for now)
+            form.querySelectorAll('.options').forEach(function (group) {
+                const field = group.dataset.field;
+                const multi = group.dataset.multi === 'true';
+                group.querySelectorAll('.option').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        if (!multi) {
+                            group.querySelectorAll('.option').forEach(function (o) { o.classList.remove('is-selected'); });
+                            btn.classList.add('is-selected');
+                            data[field] = btn.dataset.value;
+                        } else {
+                            btn.classList.toggle('is-selected');
+                            const all = Array.from(group.querySelectorAll('.option.is-selected')).map(function (o) { return o.dataset.value; });
+                            data[field] = all.join(', ');
+                        }
+                        clearOptionError(field);
+                    });
+                });
+            });
+
+            // Allow Enter in text fields to advance
+            form.querySelectorAll('.step input').forEach(function (input) {
+                input.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const nextBtn = numericSteps[currentIndex].querySelector('[data-action="next"]');
+                        if (nextBtn) nextBtn.click();
+                    }
+                });
+            });
+
+            form.addEventListener('click', function (e) {
+                const next = e.target.closest('[data-action="next"]');
+                const back = e.target.closest('[data-action="back"]');
+                if (next) {
+                    if (!validateStep(currentIndex)) return;
+                    collectStep(currentIndex);
+                    if (currentIndex < totalSteps - 1) {
+                        currentIndex++;
+                        showStep(currentIndex);
+                    }
+                }
+                if (back) {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        showStep(currentIndex);
+                    }
+                }
+            });
+
+            function renderSummary() {
+                collectStep(currentIndex);
+                const summary = document.getElementById('summary');
+                const labels = {
+                    name:    'Nombre',
+                    company: 'Empresa',
+                    email:   'Email',
+                    phone:   'Teléfono',
+                    role:    'Rol',
+                    plan:    'Plan',
+                };
+                summary.innerHTML = '';
+                Object.keys(labels).forEach(function (key) {
+                    if (!data[key]) return;
+                    const row = document.createElement('div');
+                    row.className = 'summary-row';
+                    const dt = document.createElement('dt');
+                    dt.textContent = labels[key];
+                    const dd = document.createElement('dd');
+                    dd.textContent = data[key];
+                    row.appendChild(dt);
+                    row.appendChild(dd);
+                    summary.appendChild(row);
+                });
+            }
+
+            // Re-render summary when entering step 5
+            const observer = new MutationObserver(function () {
+                const step5 = form.querySelector('.step[data-step="5"]');
+                if (step5 && step5.classList.contains('is-active')) renderSummary();
+            });
+            observer.observe(form, { subtree: true, attributes: true, attributeFilter: ['class'] });
+
+            // Submit
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (!validateStep(currentIndex)) return;
+                collectStep(currentIndex);
+
+                const submitBtn = document.getElementById('submit-btn');
+                const labelDef  = submitBtn.querySelector('[data-label-default]');
+                const labelLoad = submitBtn.querySelector('[data-label-loading]');
+                submitBtn.disabled = true;
+                labelDef.style.display  = 'none';
+                labelLoad.style.display = 'inline';
+
+                // Demo only — no backend
+                setTimeout(function () {
+                    submitBtn.disabled = false;
+                    labelDef.style.display  = 'inline';
+                    labelLoad.style.display = 'none';
+                    showStep('success');
+                }, 700);
+            });
+        })();
+    </script>
+</body>
+</html>
