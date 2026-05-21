@@ -1,0 +1,8 @@
+name = "datasheq"
+compatibility_date = "2024-10-01"
+
+# Static-only project: served entirely from ./public via Workers Static Assets.
+# No Worker script, no backend logic, no secrets — this is a UI/UX demo.
+[assets]
+directory = "./public"
+not_found_handling = "single-page-application"
