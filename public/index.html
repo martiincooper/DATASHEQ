@@ -301,6 +301,167 @@
             body { padding-bottom: 88px; }
         }
         @media (min-width: 768px) { .sticky-mobile-cta { display: none; } }
+
+        /* ──── Mobile drawer ──── */
+        .mobile-menu {
+            position: fixed; inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.22s ease;
+            z-index: 70;
+        }
+        .mobile-menu.is-open { opacity: 1; pointer-events: auto; }
+        .mobile-menu-panel {
+            position: absolute; top: 0; right: 0;
+            width: min(86vw, 360px);
+            height: 100%;
+            background: #fff;
+            box-shadow: -20px 0 50px -20px rgba(15, 23, 42, 0.35);
+            transform: translateX(100%);
+            transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: flex; flex-direction: column;
+            padding: 22px 22px calc(22px + env(safe-area-inset-bottom, 0px));
+            gap: 6px;
+        }
+        .mobile-menu.is-open .mobile-menu-panel { transform: translateX(0); }
+        .mobile-menu-link {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 4px;
+            border-bottom: 1px solid #f1f5f9;
+            font-weight: 700; color: #0f172a; font-size: 16px;
+        }
+        .mobile-menu-link:last-of-type { border-bottom: 0; }
+        .icon-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 42px; height: 42px; border-radius: 12px;
+            background: #f8fafc; border: 1px solid #e2e8f0;
+            color: #0f172a;
+        }
+
+        /* ──── Lead capture (multi-step form) ──── */
+        .lead-card {
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            border-radius: 24px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 1),
+                0 30px 60px -28px rgba(15, 23, 42, 0.28),
+                0 12px 28px -16px rgba(14, 165, 233, 0.30);
+            padding: 22px;
+        }
+        @media (min-width: 768px) { .lead-card { padding: 28px; } }
+
+        .lead-stepper {
+            display: flex; align-items: center; gap: 8px;
+            margin-bottom: 6px;
+        }
+        .lead-stepper .dot {
+            flex: 1; height: 5px; border-radius: 999px;
+            background: #e2e8f0;
+            transition: background 0.3s ease;
+        }
+        .lead-stepper .dot.is-active {
+            background: linear-gradient(90deg, #06b6d4 0%, #0ea5e9 50%, #1d4ed8 100%);
+        }
+        .lead-step {
+            display: none;
+            animation: leadStepIn 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+        .lead-step.is-active { display: block; }
+        @keyframes leadStepIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .lead-question {
+            font-size: 20px; line-height: 1.25;
+            font-weight: 800; letter-spacing: -0.01em;
+            color: #0f172a;
+        }
+        @media (min-width: 768px) { .lead-question { font-size: 22px; } }
+        .lead-helper { font-size: 13px; color: #64748b; margin-top: 4px; }
+
+        .lead-input {
+            width: 100%;
+            padding: 16px 16px;
+            border-radius: 14px;
+            border: 1.5px solid #e2e8f0;
+            background: #f8fafc;
+            font-size: 16px; /* avoid iOS zoom */
+            color: #0f172a;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+        }
+        .lead-input:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+        }
+        .lead-input.is-error { border-color: #ef4444; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12); }
+        .lead-error {
+            display: none;
+            color: #b91c1c; font-size: 12px; font-weight: 600;
+            margin-top: 6px;
+        }
+        .lead-error.is-visible { display: block; }
+
+        .option-chip {
+            display: flex; align-items: center; gap: 10px;
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            font-size: 15px; font-weight: 600; color: #0f172a;
+            text-align: left;
+            transition: border-color 0.18s ease, background 0.18s ease, transform 0.12s ease;
+            min-height: 52px;
+        }
+        .option-chip:hover { border-color: rgba(14,165,233,0.45); }
+        .option-chip:active { transform: scale(0.99); }
+        .option-chip .check {
+            flex-shrink: 0;
+            width: 22px; height: 22px; border-radius: 8px;
+            border: 1.5px solid #cbd5e1; background: #fff;
+            display: inline-flex; align-items: center; justify-content: center;
+            color: transparent;
+        }
+        .option-chip[data-multi="true"] .check { border-radius: 7px; }
+        .option-chip[data-multi="false"] .check { border-radius: 999px; }
+        .option-chip.is-selected {
+            border-color: #0ea5e9;
+            background: linear-gradient(180deg, rgba(14,165,233,0.08), rgba(29,78,216,0.05));
+        }
+        .option-chip.is-selected .check {
+            background: linear-gradient(135deg, #0ea5e9, #1d4ed8);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .lead-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #475569; font-weight: 700; font-size: 13px;
+            padding: 10px 6px;
+        }
+        .lead-back:hover { color: #0f172a; }
+
+        .lead-summary {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 14px 16px;
+            font-size: 13px;
+            color: #475569;
+        }
+        .lead-summary dt { font-weight: 700; color: #0f172a; }
+        .lead-summary dd { margin: 0 0 8px 0; }
+        .lead-summary dd:last-child { margin-bottom: 0; }
+
+        /* Smaller hero mockup section (desktop emphasis) */
+        @media (max-width: 767px) {
+            .hero-preview { display: none; }
+        }
     </style>
 </head>
 
@@ -308,7 +469,7 @@
     <!-- ============================== NAV ============================== -->
     <nav class="fixed w-full z-50 transition-all duration-300 glass-nav bg-white/80 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-16 md:h-20">
                 <a href="#top" class="flex items-center gap-2.5">
                     <span class="logo-mark">
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
@@ -323,43 +484,94 @@
                     <a href="#solucion" class="text-sm font-semibold text-slate-600 hover:text-brand-blue transition-colors">Solución</a>
                     <a href="#beneficios" class="text-sm font-semibold text-slate-600 hover:text-brand-blue transition-colors">Beneficios</a>
                     <a href="#planes" class="text-sm font-semibold text-slate-600 hover:text-brand-blue transition-colors">Planes</a>
-                    <a href="#contacto" class="btn-primary !py-2.5 !px-5 !text-sm">
-                        Solicita más información
+                    <a href="#lead-form" class="btn-primary !py-2.5 !px-5 !text-sm">
+                        Solicita información
                     </a>
                 </div>
-                <a href="#contacto" class="md:hidden text-sm font-bold text-brand-blue">Contacto →</a>
+                <button type="button" id="mobile-menu-btn" class="md:hidden icon-btn" aria-label="Abrir menú" aria-controls="mobile-menu" aria-expanded="false">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
 
+    <!-- ============================== MOBILE DRAWER ============================== -->
+    <div id="mobile-menu" class="mobile-menu md:hidden" aria-hidden="true">
+        <div class="mobile-menu-panel">
+            <div class="flex items-center justify-between mb-2">
+                <a href="#top" class="flex items-center gap-2.5" data-mm-close>
+                    <span class="logo-mark">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 6h11a6 6 0 0 1 0 12H5V6z" fill="currentColor" opacity="0.9"/>
+                            <path d="M9 10l2 2 4-4" stroke="#0b1224" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                    <span class="font-extrabold text-xl tracking-tight text-slate-900">datasheq<span class="text-brand-sky">.</span></span>
+                </a>
+                <button type="button" id="mobile-menu-close" class="icon-btn" aria-label="Cerrar menú">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M6 18L18 6"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="mt-2">
+                <a href="#funcionalidades" class="mobile-menu-link" data-mm-close>Funcionalidades<span class="text-brand-sky">→</span></a>
+                <a href="#solucion" class="mobile-menu-link" data-mm-close>Solución<span class="text-brand-sky">→</span></a>
+                <a href="#beneficios" class="mobile-menu-link" data-mm-close>Beneficios<span class="text-brand-sky">→</span></a>
+                <a href="#planes" class="mobile-menu-link" data-mm-close>Planes<span class="text-brand-sky">→</span></a>
+                <a href="#contacto" class="mobile-menu-link" data-mm-close>Contacto<span class="text-brand-sky">→</span></a>
+            </nav>
+            <a href="#lead-form" class="btn-primary w-full mt-4" data-mm-close>
+                Solicita información
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
+            <p class="text-xs text-slate-400 mt-4 leading-relaxed">SaaS B2B · Cumplimiento legal automatizado para empresas modernas.</p>
+        </div>
+    </div>
+
     <main id="top" class="w-full">
         <!-- ============================== 1. HERO ============================== -->
-        <section class="hero-gradient mesh-bg pt-28 pb-14 md:pt-36 md:pb-20">
+        <section class="hero-gradient mesh-bg pt-24 pb-12 md:pt-32 md:pb-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                    <div class="lg:col-span-6 text-center lg:text-left animate-slide-up">
-                        <span class="pill pill-cyan mb-5">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                    <!-- Copy column -->
+                    <div class="lg:col-span-7 text-center lg:text-left animate-slide-up order-1">
+                        <span class="pill pill-cyan mb-4">
                             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>
-                            Plataforma SaaS B2B · Cumplimiento legal
+                            SaaS B2B · Cumplimiento legal
                         </span>
-                        <h1 class="headline-display text-[34px] sm:text-5xl lg:text-[58px] text-slate-900 mb-5">
+                        <h1 class="headline-display text-[30px] sm:text-5xl lg:text-[58px] text-slate-900 mb-4 md:mb-5">
                             <span class="heavy">Transforma la complejidad legal</span>
                             <span class="block thin mt-2">en verificaciones inteligentes</span>
                             <span class="block heavy bg-gradient-to-r from-brand-sky via-brand-blue to-brand-navy bg-clip-text text-transparent">y automatizadas.</span>
                         </h1>
-                        <p class="text-base md:text-lg text-slate-600 leading-relaxed mb-7 max-w-xl mx-auto lg:mx-0">
+                        <p class="text-[15px] md:text-lg text-slate-600 leading-relaxed mb-5 md:mb-7 max-w-xl mx-auto lg:mx-0">
                             Deja atrás la complejidad del cumplimiento manual y descubre una forma más simple de gestionar verificaciones legales, control documental y seguimiento operativo.
                         </p>
-                        <div class="flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start mb-7">
-                            <a href="#contacto" class="btn-primary w-full sm:w-auto">
-                                Solicita más información
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                            <a href="#solucion" class="btn-secondary w-full sm:w-auto">
-                                Ver solución
-                            </a>
-                        </div>
-                        <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
+
+                        <!-- Trust value points -->
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-xl mx-auto lg:mx-0 mb-6 md:mb-8 text-left">
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="mt-0.5 w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 inline-flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                <span><strong class="font-bold text-slate-900">Verificaciones digitales</strong> con checklist inteligente.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="mt-0.5 w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 inline-flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                <span><strong class="font-bold text-slate-900">Matriz legal</strong> con responsables y evidencia.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="mt-0.5 w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 inline-flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                <span><strong class="font-bold text-slate-900">Informes automáticos</strong> en tiempo real.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="mt-0.5 w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 inline-flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                <span><strong class="font-bold text-slate-900">Móvil first</strong> — opera en terreno.</span>
+                            </li>
+                        </ul>
+
+                        <div class="hidden lg:flex flex-wrap gap-2">
                             <span class="pill pill-sky">Automatización</span>
                             <span class="pill pill-cyan">Control documental</span>
                             <span class="pill pill-navy">Trazabilidad</span>
@@ -367,111 +579,278 @@
                         </div>
                     </div>
 
-                    <!-- Hero visual: dashboard mockup -->
-                    <div class="lg:col-span-6 animate-fade-in">
-                        <div class="relative">
-                            <div class="absolute -inset-6 bg-gradient-to-br from-brand-aqua/30 via-brand-sky/20 to-brand-navy/20 rounded-[40px] blur-3xl"></div>
-                            <div class="relative grid grid-cols-12 gap-3">
-                                <!-- Main dashboard mock -->
-                                <div class="col-span-12 md:col-span-8 mock-window">
-                                    <div class="mock-bar">
-                                        <span class="mock-dot bg-red-300"></span>
-                                        <span class="mock-dot bg-amber-300"></span>
-                                        <span class="mock-dot bg-emerald-300"></span>
-                                        <span class="mock-bar-label uppercase">datasheq · panel administrativo</span>
+                    <!-- Lead form column -->
+                    <div class="lg:col-span-5 order-2 animate-fade-in">
+                        <div id="lead-form" class="lead-card relative">
+                            <div class="absolute -inset-3 -z-10 bg-gradient-to-br from-brand-aqua/25 via-brand-sky/15 to-brand-navy/15 rounded-[28px] blur-2xl hidden md:block"></div>
+
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="pill pill-sky">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>
+                                    Solicita información
+                                </span>
+                                <span id="lead-step-counter" class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Paso 1 de 5</span>
+                            </div>
+
+                            <!-- Stepper -->
+                            <div class="lead-stepper" aria-hidden="true">
+                                <span class="dot is-active" data-dot="1"></span>
+                                <span class="dot" data-dot="2"></span>
+                                <span class="dot" data-dot="3"></span>
+                                <span class="dot" data-dot="4"></span>
+                                <span class="dot" data-dot="5"></span>
+                            </div>
+
+                            <form id="datasheq-lead-form" class="mt-5" novalidate>
+                                <!-- STEP 1 — name -->
+                                <div class="lead-step is-active" data-step="1">
+                                    <p class="lead-question">¿Cuál es tu nombre?</p>
+                                    <p class="lead-helper">Para personalizar la conversación.</p>
+                                    <div class="mt-4">
+                                        <label class="sr-only" for="lead-name">Nombre</label>
+                                        <input type="text" id="lead-name" name="name" autocomplete="given-name" class="lead-input" placeholder="Ej. Camila Soto" data-required="true">
+                                        <p class="lead-error" data-error-for="lead-name">Ingresa tu nombre para continuar.</p>
                                     </div>
-                                    <div class="p-5">
-                                        <div class="flex items-center justify-between mb-4">
-                                            <div>
-                                                <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Cumplimiento global</p>
-                                                <p class="text-2xl font-extrabold text-slate-900 mt-1">87%</p>
-                                            </div>
-                                            <span class="pill pill-emerald">+4.2% mes</span>
-                                        </div>
-                                        <div class="space-y-3 mb-5">
-                                            <div>
-                                                <div class="flex justify-between text-[11px] font-semibold text-slate-500 mb-1"><span>Seguridad</span><span class="text-slate-700">92%</span></div>
-                                                <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div>
-                                            </div>
-                                            <div>
-                                                <div class="flex justify-between text-[11px] font-semibold text-slate-500 mb-1"><span>Salud Ocupacional</span><span class="text-slate-700">86%</span></div>
-                                                <div class="progress-bar"><div class="progress-fill" style="width:86%"></div></div>
-                                            </div>
-                                            <div>
-                                                <div class="flex justify-between text-[11px] font-semibold text-slate-500 mb-1"><span>Medio Ambiente</span><span class="text-slate-700">79%</span></div>
-                                                <div class="progress-bar"><div class="progress-fill" style="width:79%"></div></div>
-                                            </div>
-                                        </div>
-                                        <div class="grid grid-cols-3 gap-2">
-                                            <div class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-center">
-                                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Verif.</p>
-                                                <p class="text-lg font-extrabold text-slate-900">128</p>
-                                            </div>
-                                            <div class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-center">
-                                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Pendientes</p>
-                                                <p class="text-lg font-extrabold text-amber-600">14</p>
-                                            </div>
-                                            <div class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-center">
-                                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Críticas</p>
-                                                <p class="text-lg font-extrabold text-rose-600">3</p>
-                                            </div>
-                                        </div>
+                                    <div class="flex items-center justify-end mt-5">
+                                        <button type="button" class="btn-primary" data-action="next">
+                                            Continuar
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                        </button>
                                     </div>
                                 </div>
-                                <!-- Mobile mock -->
-                                <div class="col-span-12 md:col-span-4 mock-window md:translate-y-6">
-                                    <div class="mock-bar">
-                                        <span class="mock-bar-label">📱 App móvil</span>
+
+                                <!-- STEP 2 — email -->
+                                <div class="lead-step" data-step="2">
+                                    <p class="lead-question">¿Cuál es tu correo de trabajo?</p>
+                                    <p class="lead-helper">Te enviaremos la información a este correo.</p>
+                                    <div class="mt-4">
+                                        <label class="sr-only" for="lead-email">Correo de trabajo</label>
+                                        <input type="email" id="lead-email" name="email" autocomplete="email" inputmode="email" class="lead-input" placeholder="tu@empresa.com" data-required="true" data-validate="email">
+                                        <p class="lead-error" data-error-for="lead-email">Ingresa un correo válido.</p>
                                     </div>
-                                    <div class="p-4 space-y-2.5">
-                                        <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500 mb-1">Checklist en terreno</p>
-                                        <div class="flex items-center gap-2 p-2 rounded-lg bg-emerald-50 border border-emerald-100">
-                                            <span class="w-5 h-5 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold">✓</span>
-                                            <span class="text-xs font-semibold text-slate-700 truncate">EPP operativos</span>
-                                        </div>
-                                        <div class="flex items-center gap-2 p-2 rounded-lg bg-emerald-50 border border-emerald-100">
-                                            <span class="w-5 h-5 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold">✓</span>
-                                            <span class="text-xs font-semibold text-slate-700 truncate">Extintores vigentes</span>
-                                        </div>
-                                        <div class="flex items-center gap-2 p-2 rounded-lg bg-amber-50 border border-amber-100">
-                                            <span class="w-5 h-5 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center font-bold">!</span>
-                                            <span class="text-xs font-semibold text-slate-700 truncate">Capacitación pendiente</span>
-                                        </div>
-                                        <div class="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-200">
-                                            <span class="w-5 h-5 rounded-full bg-slate-300"></span>
-                                            <span class="text-xs font-semibold text-slate-500 truncate">Inspección térmica</span>
-                                        </div>
+                                    <div class="flex items-center justify-between mt-5">
+                                        <button type="button" class="lead-back" data-action="back">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                                            Atrás
+                                        </button>
+                                        <button type="button" class="btn-primary" data-action="next">
+                                            Continuar
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                        </button>
                                     </div>
                                 </div>
-                                <!-- Matriz legal mock -->
-                                <div class="col-span-12 mock-window">
-                                    <div class="p-4">
-                                        <div class="flex items-center justify-between mb-3">
-                                            <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Matriz legal · Responsables y evidencia</p>
-                                            <span class="pill pill-navy">Tiempo real</span>
-                                        </div>
-                                        <div class="grid grid-cols-4 gap-2 text-[11px]">
-                                            <div class="font-bold text-slate-500 uppercase">Cuerpo legal</div>
-                                            <div class="font-bold text-slate-500 uppercase">Resp.</div>
-                                            <div class="font-bold text-slate-500 uppercase">Frec.</div>
-                                            <div class="font-bold text-slate-500 uppercase">Estado</div>
 
-                                            <div class="font-semibold text-slate-700 truncate">DS 594</div>
-                                            <div class="text-slate-500">P. Soto</div>
-                                            <div class="text-slate-500">Mensual</div>
-                                            <div><span class="pill pill-emerald !py-0 !px-2 !text-[10px]">OK</span></div>
-
-                                            <div class="font-semibold text-slate-700 truncate">Ley 16.744</div>
-                                            <div class="text-slate-500">M. Reyes</div>
-                                            <div class="text-slate-500">Trimestral</div>
-                                            <div><span class="pill pill-cyan !py-0 !px-2 !text-[10px]">En curso</span></div>
-
-                                            <div class="font-semibold text-slate-700 truncate">RES 1433</div>
-                                            <div class="text-slate-500">A. Vidal</div>
-                                            <div class="text-slate-500">Anual</div>
-                                            <div><span class="pill pill-sky !py-0 !px-2 !text-[10px]">Próximo</span></div>
-                                        </div>
+                                <!-- STEP 3 — needs (multi) -->
+                                <div class="lead-step" data-step="3">
+                                    <p class="lead-question">¿Tu empresa necesita apoyo en?</p>
+                                    <p class="lead-helper">Puedes seleccionar más de una opción.</p>
+                                    <div class="mt-4 grid grid-cols-1 gap-2.5" data-multi-group="needs">
+                                        <button type="button" class="option-chip" data-multi="true" data-value="Cumplimiento legal"><span class="check"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span> Cumplimiento legal</button>
+                                        <button type="button" class="option-chip" data-multi="true" data-value="Control documental"><span class="check"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span> Control documental</button>
+                                        <button type="button" class="option-chip" data-multi="true" data-value="Verificaciones legales"><span class="check"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span> Verificaciones legales</button>
+                                        <button type="button" class="option-chip" data-multi="true" data-value="Gestión operativa"><span class="check"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span> Gestión operativa</button>
+                                        <button type="button" class="option-chip" data-multi="true" data-value="Transformación digital"><span class="check"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span> Transformación digital</button>
                                     </div>
+                                    <p class="lead-error" data-error-for="needs">Selecciona al menos una opción.</p>
+                                    <div class="flex items-center justify-between mt-5">
+                                        <button type="button" class="lead-back" data-action="back">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                                            Atrás
+                                        </button>
+                                        <button type="button" class="btn-primary" data-action="next">
+                                            Continuar
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- STEP 4 — installations -->
+                                <div class="lead-step" data-step="4">
+                                    <p class="lead-question">¿Cuántas instalaciones o empresas necesitas gestionar?</p>
+                                    <p class="lead-helper">Esto nos ayuda a recomendarte el plan adecuado.</p>
+                                    <div class="mt-4 grid grid-cols-2 gap-2.5" data-single-group="installations">
+                                        <button type="button" class="option-chip" data-multi="false" data-value="1"><span class="check"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span> 1</button>
+                                        <button type="button" class="option-chip" data-multi="false" data-value="2-5"><span class="check"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span> 2–5</button>
+                                        <button type="button" class="option-chip" data-multi="false" data-value="5-10"><span class="check"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span> 5–10</button>
+                                        <button type="button" class="option-chip" data-multi="false" data-value="10+"><span class="check"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span> 10+</button>
+                                    </div>
+                                    <p class="lead-error" data-error-for="installations">Selecciona una opción para continuar.</p>
+                                    <div class="flex items-center justify-between mt-5">
+                                        <button type="button" class="lead-back" data-action="back">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                                            Atrás
+                                        </button>
+                                        <button type="button" class="btn-primary" data-action="next">
+                                            Continuar
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- STEP 5 — review + submit -->
+                                <div class="lead-step" data-step="5">
+                                    <p class="lead-question">Estás a un paso 🚀</p>
+                                    <p class="lead-helper">Revisa tu solicitud y envíala. Te contactaremos pronto.</p>
+                                    <dl id="lead-review" class="lead-summary mt-4 space-y-1"></dl>
+
+                                    <button type="submit" id="lead-submit" class="btn-primary w-full !justify-center mt-5">
+                                        <span data-label-default>Solicitar información</span>
+                                        <span data-label-loading class="hidden">Enviando…</span>
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                    </button>
+
+                                    <div class="flex items-center justify-between mt-3">
+                                        <button type="button" class="lead-back" data-action="back">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                                            Atrás
+                                        </button>
+                                        <p class="text-[11px] text-slate-400 text-right max-w-[60%] leading-snug">
+                                            Al continuar aceptas nuestros
+                                            <a href="/terminos.html" class="underline hover:text-brand-blue">Términos</a> y
+                                            <a href="/privacidad.html" class="underline hover:text-brand-blue">Privacidad</a>.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- SUCCESS -->
+                                <div id="lead-success" class="lead-step" data-step="success">
+                                    <div class="flex items-center justify-center w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 mx-auto mb-4">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                    </div>
+                                    <p class="text-center text-xl font-extrabold text-slate-900">¡Solicitud enviada!</p>
+                                    <p class="text-center text-sm text-slate-500 mt-1">Gracias <span data-success-name>👋</span>. Te contactaremos pronto al correo que indicaste.</p>
+                                    <button type="button" class="btn-secondary w-full mt-5 !justify-center" data-action="restart">
+                                        Enviar otra solicitud
+                                    </button>
+                                </div>
+
+                                <!-- Hidden inputs for value persistence -->
+                                <input type="hidden" name="needs" id="lead-needs">
+                                <input type="hidden" name="installations" id="lead-installations">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile-only pill row (below form to avoid pushing it down) -->
+                <div class="flex flex-wrap gap-2 justify-center mt-8 lg:hidden">
+                    <span class="pill pill-sky">Automatización</span>
+                    <span class="pill pill-cyan">Control documental</span>
+                    <span class="pill pill-navy">Trazabilidad</span>
+                    <span class="pill pill-emerald">Móvil first</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================== HERO PREVIEW (DESKTOP) ====================== -->
+        <section class="hero-preview py-12 lg:py-16 bg-white border-y border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-8">
+                    <span class="pill pill-cyan mb-3">Vista previa</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">Datasheq en acción</h2>
+                </div>
+                <div class="relative">
+                    <div class="absolute -inset-6 bg-gradient-to-br from-brand-aqua/20 via-brand-sky/15 to-brand-navy/15 rounded-[40px] blur-3xl"></div>
+                    <div class="relative grid grid-cols-12 gap-3">
+                        <!-- Main dashboard mock -->
+                        <div class="col-span-12 md:col-span-8 mock-window">
+                            <div class="mock-bar">
+                                <span class="mock-dot bg-red-300"></span>
+                                <span class="mock-dot bg-amber-300"></span>
+                                <span class="mock-dot bg-emerald-300"></span>
+                                <span class="mock-bar-label uppercase">datasheq · panel administrativo</span>
+                            </div>
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Cumplimiento global</p>
+                                        <p class="text-2xl font-extrabold text-slate-900 mt-1">87%</p>
+                                    </div>
+                                    <span class="pill pill-emerald">+4.2% mes</span>
+                                </div>
+                                <div class="space-y-3 mb-5">
+                                    <div>
+                                        <div class="flex justify-between text-[11px] font-semibold text-slate-500 mb-1"><span>Seguridad</span><span class="text-slate-700">92%</span></div>
+                                        <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-[11px] font-semibold text-slate-500 mb-1"><span>Salud Ocupacional</span><span class="text-slate-700">86%</span></div>
+                                        <div class="progress-bar"><div class="progress-fill" style="width:86%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-[11px] font-semibold text-slate-500 mb-1"><span>Medio Ambiente</span><span class="text-slate-700">79%</span></div>
+                                        <div class="progress-bar"><div class="progress-fill" style="width:79%"></div></div>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-center">
+                                        <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Verif.</p>
+                                        <p class="text-lg font-extrabold text-slate-900">128</p>
+                                    </div>
+                                    <div class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-center">
+                                        <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Pendientes</p>
+                                        <p class="text-lg font-extrabold text-amber-600">14</p>
+                                    </div>
+                                    <div class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-center">
+                                        <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Críticas</p>
+                                        <p class="text-lg font-extrabold text-rose-600">3</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile mock -->
+                        <div class="col-span-12 md:col-span-4 mock-window md:translate-y-6">
+                            <div class="mock-bar">
+                                <span class="mock-bar-label">📱 App móvil</span>
+                            </div>
+                            <div class="p-4 space-y-2.5">
+                                <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500 mb-1">Checklist en terreno</p>
+                                <div class="flex items-center gap-2 p-2 rounded-lg bg-emerald-50 border border-emerald-100">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold">✓</span>
+                                    <span class="text-xs font-semibold text-slate-700 truncate">EPP operativos</span>
+                                </div>
+                                <div class="flex items-center gap-2 p-2 rounded-lg bg-emerald-50 border border-emerald-100">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold">✓</span>
+                                    <span class="text-xs font-semibold text-slate-700 truncate">Extintores vigentes</span>
+                                </div>
+                                <div class="flex items-center gap-2 p-2 rounded-lg bg-amber-50 border border-amber-100">
+                                    <span class="w-5 h-5 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center font-bold">!</span>
+                                    <span class="text-xs font-semibold text-slate-700 truncate">Capacitación pendiente</span>
+                                </div>
+                                <div class="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-200">
+                                    <span class="w-5 h-5 rounded-full bg-slate-300"></span>
+                                    <span class="text-xs font-semibold text-slate-500 truncate">Inspección térmica</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Matriz legal mock -->
+                        <div class="col-span-12 mock-window">
+                            <div class="p-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Matriz legal · Responsables y evidencia</p>
+                                    <span class="pill pill-navy">Tiempo real</span>
+                                </div>
+                                <div class="grid grid-cols-4 gap-2 text-[11px]">
+                                    <div class="font-bold text-slate-500 uppercase">Cuerpo legal</div>
+                                    <div class="font-bold text-slate-500 uppercase">Resp.</div>
+                                    <div class="font-bold text-slate-500 uppercase">Frec.</div>
+                                    <div class="font-bold text-slate-500 uppercase">Estado</div>
+
+                                    <div class="font-semibold text-slate-700 truncate">DS 594</div>
+                                    <div class="text-slate-500">P. Soto</div>
+                                    <div class="text-slate-500">Mensual</div>
+                                    <div><span class="pill pill-emerald !py-0 !px-2 !text-[10px]">OK</span></div>
+
+                                    <div class="font-semibold text-slate-700 truncate">Ley 16.744</div>
+                                    <div class="text-slate-500">M. Reyes</div>
+                                    <div class="text-slate-500">Trimestral</div>
+                                    <div><span class="pill pill-cyan !py-0 !px-2 !text-[10px]">En curso</span></div>
+
+                                    <div class="font-semibold text-slate-700 truncate">RES 1433</div>
+                                    <div class="text-slate-500">A. Vidal</div>
+                                    <div class="text-slate-500">Anual</div>
+                                    <div><span class="pill pill-sky !py-0 !px-2 !text-[10px]">Próximo</span></div>
                                 </div>
                             </div>
                         </div>
@@ -494,7 +873,7 @@
         </section>
 
         <!-- ============================== 2. FUNCIONALIDADES ============================== -->
-        <section id="funcionalidades" class="py-16 md:py-24">
+        <section id="funcionalidades" class="py-14 md:py-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-12">
                     <span class="pill pill-cyan mb-4">Funcionalidades</span>
@@ -551,7 +930,7 @@
         </section>
 
         <!-- ============================== 3. NUESTRA SOLUCIÓN ============================== -->
-        <section id="solucion" class="py-16 md:py-24 bg-white">
+        <section id="solucion" class="py-14 md:py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                     <div class="lg:col-span-6">
@@ -611,7 +990,7 @@
         </section>
 
         <!-- ============================== 4. BENEFICIOS ============================== -->
-        <section id="beneficios" class="py-16 md:py-24 bg-slate-50">
+        <section id="beneficios" class="py-14 md:py-24 bg-slate-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-12">
                     <span class="pill pill-emerald mb-4">Beneficios</span>
@@ -635,7 +1014,7 @@
         </section>
 
         <!-- ============================== 5. TRANSFORMACIÓN DIGITAL ============================== -->
-        <section class="py-16 md:py-24">
+        <section class="py-14 md:py-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bento-dark p-8 md:p-14">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -660,7 +1039,7 @@
         </section>
 
         <!-- ============================== 6. PLANES ============================== -->
-        <section id="planes" class="py-16 md:py-24 bg-white">
+        <section id="planes" class="py-14 md:py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-12">
                     <span class="pill pill-navy mb-4">Planes</span>
@@ -789,110 +1168,35 @@
             </div>
         </section>
 
-        <!-- ============================== 7. CTA FINAL + FORMULARIO ============================== -->
-        <section id="contacto" class="py-16 md:py-24 bg-gradient-to-br from-brand-ink via-brand-night to-brand-navy text-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                    <div class="lg:col-span-6">
-                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-brand-mint text-[11px] font-bold uppercase tracking-[0.14em] mb-5">Comencemos</span>
-                        <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.05] mb-5">Comienza a digitalizar tus procesos legales y operativos.</h2>
-                        <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-8 max-w-xl">
-                            Una plataforma diseñada para empresas modernas que necesitan orden, trazabilidad y resultados — sin la complejidad del cumplimiento manual.
-                        </p>
+        <!-- ============================== 7. CTA FINAL ============================== -->
+        <section id="contacto" class="py-14 md:py-24 bg-gradient-to-br from-brand-ink via-brand-night to-brand-navy text-white">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-brand-mint text-[11px] font-bold uppercase tracking-[0.14em] mb-5">Comencemos</span>
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.05] mb-4">Comienza a digitalizar tus procesos legales y operativos.</h2>
+                    <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+                        Una plataforma diseñada para empresas modernas que necesitan orden, trazabilidad y resultados — sin la complejidad del cumplimiento manual.
+                    </p>
 
-                        <div class="flex flex-wrap gap-3 mb-8">
-                            <a href="#lead-form" class="btn-primary">
-                                Solicitar información
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                            <a href="https://wa.me/56900000000?text=Hola%20Datasheq%2C%20me%20gustar%C3%ADa%20conocer%20la%20plataforma." target="_blank" rel="noopener" class="btn-ghost-light">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 0 0 4 18l-1.5 5.5L8 22a11 11 0 0 0 12.5-18.5zM12 20a8 8 0 0 1-4-1.1l-.3-.2-3.4.9.9-3.3-.2-.3A8 8 0 1 1 12 20zm4.5-5.6c-.2-.1-1.3-.7-1.5-.7-.2-.1-.4-.1-.6.1-.2.2-.6.7-.7.8-.1.2-.3.2-.5.1-.2-.1-.9-.4-1.7-1.1-.6-.6-1.1-1.3-1.2-1.5-.1-.2 0-.3.1-.4l.4-.4.2-.3c.1-.2 0-.3 0-.4 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.2 0 1.3 1 2.5 1.1 2.7.1.2 1.9 2.9 4.7 4 .7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.1-.3-.2-.5-.3z"/></svg>
-                                Contactar por WhatsApp
-                            </a>
-                            <a href="#solucion" class="btn-ghost-light">
-                                Ver demostración
-                            </a>
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-4 max-w-md">
-                            <div><p class="text-2xl font-extrabold text-brand-mint">100%</p><p class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">Digital</p></div>
-                            <div><p class="text-2xl font-extrabold text-brand-mint">SaaS</p><p class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">B2B</p></div>
-                            <div><p class="text-2xl font-extrabold text-brand-mint">Móvil</p><p class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">First</p></div>
-                        </div>
+                    <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 justify-center mb-10">
+                        <a href="#lead-form" class="btn-primary w-full sm:w-auto">
+                            Solicitar información
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                        <a href="https://wa.me/56900000000?text=Hola%20Datasheq%2C%20me%20gustar%C3%ADa%20conocer%20la%20plataforma." target="_blank" rel="noopener" class="btn-ghost-light w-full sm:w-auto">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 0 0 4 18l-1.5 5.5L8 22a11 11 0 0 0 12.5-18.5zM12 20a8 8 0 0 1-4-1.1l-.3-.2-3.4.9.9-3.3-.2-.3A8 8 0 1 1 12 20zm4.5-5.6c-.2-.1-1.3-.7-1.5-.7-.2-.1-.4-.1-.6.1-.2.2-.6.7-.7.8-.1.2-.3.2-.5.1-.2-.1-.9-.4-1.7-1.1-.6-.6-1.1-1.3-1.2-1.5-.1-.2 0-.3.1-.4l.4-.4.2-.3c.1-.2 0-.3 0-.4 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.2 0 1.3 1 2.5 1.1 2.7.1.2 1.9 2.9 4.7 4 .7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.1-.3-.2-.5-.3z"/></svg>
+                            WhatsApp
+                        </a>
+                        <a href="mailto:contacto@datasheq.com" class="btn-ghost-light w-full sm:w-auto">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
+                            Email
+                        </a>
                     </div>
 
-                    <!-- ── Lead form ── -->
-                    <div class="lg:col-span-6">
-                        <div id="lead-form" class="glass-card rounded-2xl p-6 md:p-8 text-slate-900">
-                            <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 mb-1">Solicita más información</h3>
-                            <p class="text-sm text-slate-500 mb-6">Demo · este formulario es solo una vista previa de UI.</p>
-
-                            <form id="datasheq-lead-form" class="space-y-4" novalidate>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="form-label" for="lead-name">Nombre</label>
-                                        <input type="text" id="lead-name" name="name" required autocomplete="name" class="form-input" placeholder="Ej. Camila Soto">
-                                    </div>
-                                    <div>
-                                        <label class="form-label" for="lead-company">Empresa</label>
-                                        <input type="text" id="lead-company" name="company" required autocomplete="organization" class="form-input" placeholder="Ej. Empresa SpA">
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="form-label" for="lead-email">Email corporativo</label>
-                                        <input type="email" id="lead-email" name="email" required autocomplete="email" class="form-input" placeholder="tu@empresa.com">
-                                    </div>
-                                    <div>
-                                        <label class="form-label" for="lead-phone">Teléfono</label>
-                                        <input type="tel" id="lead-phone" name="phone" required autocomplete="tel" class="form-input" placeholder="+56 9 1234 5678">
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="form-label" for="lead-role">Tu rol</label>
-                                        <select id="lead-role" name="role" class="form-input">
-                                            <option value="HSE">HSE / Prevención</option>
-                                            <option value="Legal">Legal / Compliance</option>
-                                            <option value="Operaciones">Operaciones</option>
-                                            <option value="C-Level">Directivo (CEO, CTO, CFO)</option>
-                                            <option value="Otro">Otro</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="form-label" for="lead-plan">Plan de interés</label>
-                                        <select id="lead-plan" name="plan" class="form-input">
-                                            <option value="Profesional">Profesional</option>
-                                            <option value="Empresa">Empresa</option>
-                                            <option value="Básico">Básico</option>
-                                            <option value="Libre">Libre</option>
-                                            <option value="No estoy seguro">No estoy seguro</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="form-label" for="lead-message">Cuéntanos brevemente tu necesidad</label>
-                                    <textarea id="lead-message" name="message" rows="3" class="form-input" placeholder="Ej. Necesitamos digitalizar verificaciones en 5 instalaciones."></textarea>
-                                </div>
-
-                                <button type="submit" id="lead-submit" class="btn-primary w-full !justify-center">
-                                    <span data-label-default>Enviar solicitud</span>
-                                    <span data-label-loading class="hidden">Enviando…</span>
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                                </button>
-
-                                <p class="text-[11px] text-slate-400 leading-relaxed">
-                                    Al enviar este formulario aceptas nuestros
-                                    <a href="/terminos.html" class="underline hover:text-brand-blue">Términos</a> y nuestra
-                                    <a href="/privacidad.html" class="underline hover:text-brand-blue">Política de Privacidad</a>.
-                                </p>
-
-                                <div id="lead-success" class="hidden rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-sm text-emerald-800 animate-fade-in" role="status">
-                                    <p class="font-bold mb-1">¡Vista previa enviada!</p>
-                                    <p>Esto es una demo de UI: no se envió ninguna información. La integración real se conectará al backend cuando esté lista.</p>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="grid grid-cols-3 gap-4 max-w-md mx-auto">
+                        <div><p class="text-2xl font-extrabold text-brand-mint">100%</p><p class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">Digital</p></div>
+                        <div><p class="text-2xl font-extrabold text-brand-mint">SaaS</p><p class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">B2B</p></div>
+                        <div><p class="text-2xl font-extrabold text-brand-mint">Móvil</p><p class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">First</p></div>
                     </div>
                 </div>
             </div>
@@ -964,8 +1268,8 @@
     </footer>
 
     <!-- Sticky mobile CTA -->
-    <a href="#contacto" class="sticky-mobile-cta btn-primary md:hidden">
-        Solicita más información
+    <a href="#lead-form" class="sticky-mobile-cta btn-primary md:hidden">
+        Solicita información
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
     </a>
 
@@ -987,52 +1291,247 @@
             els.forEach(function (el) { io.observe(el); });
         })();
 
-        // ── Lead form (DEMO) — no backend, only client-side success preview ──
+        // ── Mobile menu drawer ──
         (function () {
-            const form = document.getElementById('datasheq-lead-form');
+            var btn   = document.getElementById('mobile-menu-btn');
+            var panel = document.getElementById('mobile-menu');
+            var closeBtn = document.getElementById('mobile-menu-close');
+            if (!btn || !panel) return;
+
+            function open() {
+                panel.classList.add('is-open');
+                panel.setAttribute('aria-hidden', 'false');
+                btn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            }
+            function close() {
+                panel.classList.remove('is-open');
+                panel.setAttribute('aria-hidden', 'true');
+                btn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+            btn.addEventListener('click', open);
+            if (closeBtn) closeBtn.addEventListener('click', close);
+            panel.addEventListener('click', function (e) { if (e.target === panel) close(); });
+            panel.querySelectorAll('[data-mm-close]').forEach(function (a) {
+                a.addEventListener('click', close);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && panel.classList.contains('is-open')) close();
+            });
+        })();
+
+        // ── Multi-step lead form ──
+        (function () {
+            var form = document.getElementById('datasheq-lead-form');
             if (!form) return;
 
-            const submitBtn   = document.getElementById('lead-submit');
-            const labelDef    = submitBtn.querySelector('[data-label-default]');
-            const labelLoad   = submitBtn.querySelector('[data-label-loading]');
-            const successBox  = document.getElementById('lead-success');
+            var STEPS = 5;
+            var current = 1;
+            var steps = form.querySelectorAll('.lead-step[data-step]');
+            var dots  = document.querySelectorAll('.lead-stepper .dot');
+            var counter = document.getElementById('lead-step-counter');
+            var nameInput = document.getElementById('lead-name');
+            var emailInput = document.getElementById('lead-email');
+            var needsHidden = document.getElementById('lead-needs');
+            var instHidden  = document.getElementById('lead-installations');
+            var submitBtn = document.getElementById('lead-submit');
+            var successEl = document.getElementById('lead-success');
 
-            function setLoading(isLoading) {
-                submitBtn.disabled = isLoading;
-                labelDef.classList.toggle('hidden', isLoading);
-                labelLoad.classList.toggle('hidden', !isLoading);
-                submitBtn.style.opacity = isLoading ? '0.75' : '1';
+            var state = {
+                name: '',
+                email: '',
+                needs: [],
+                installations: ''
+            };
+
+            function showStep(n) {
+                steps.forEach(function (s) {
+                    var idx = s.getAttribute('data-step');
+                    if (idx === String(n) || (n === 'success' && idx === 'success')) {
+                        s.classList.add('is-active');
+                    } else {
+                        s.classList.remove('is-active');
+                    }
+                });
+                if (typeof n === 'number') {
+                    current = n;
+                    dots.forEach(function (d, i) {
+                        d.classList.toggle('is-active', (i + 1) <= n);
+                    });
+                    if (counter) counter.textContent = 'Paso ' + n + ' de ' + STEPS;
+                    // focus the first input on text steps
+                    setTimeout(function () {
+                        var active = form.querySelector('.lead-step.is-active');
+                        if (!active) return;
+                        var firstInput = active.querySelector('input[type="text"], input[type="email"]');
+                        if (firstInput && window.matchMedia('(min-width: 768px)').matches) firstInput.focus();
+                    }, 100);
+                } else {
+                    if (counter) counter.textContent = '¡Listo!';
+                    dots.forEach(function (d) { d.classList.add('is-active'); });
+                }
             }
 
+            function setError(key, visible) {
+                var el = form.querySelector('[data-error-for="' + key + '"]');
+                if (el) el.classList.toggle('is-visible', !!visible);
+                var input = form.querySelector('#' + key);
+                if (input) input.classList.toggle('is-error', !!visible);
+            }
+
+            function validateStep(n) {
+                if (n === 1) {
+                    var v = (nameInput.value || '').trim();
+                    state.name = v;
+                    if (v.length < 2) { setError('lead-name', true); return false; }
+                    setError('lead-name', false); return true;
+                }
+                if (n === 2) {
+                    var v = (emailInput.value || '').trim();
+                    state.email = v;
+                    var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+                    if (!ok) { setError('lead-email', true); return false; }
+                    setError('lead-email', false); return true;
+                }
+                if (n === 3) {
+                    if (state.needs.length === 0) { setError('needs', true); return false; }
+                    setError('needs', false);
+                    needsHidden.value = state.needs.join(', ');
+                    return true;
+                }
+                if (n === 4) {
+                    if (!state.installations) { setError('installations', true); return false; }
+                    setError('installations', false);
+                    instHidden.value = state.installations;
+                    return true;
+                }
+                return true;
+            }
+
+            function buildReview() {
+                var review = document.getElementById('lead-review');
+                if (!review) return;
+                review.innerHTML = '' +
+                    '<dt>Nombre</dt><dd>' + escapeHtml(state.name) + '</dd>' +
+                    '<dt>Correo</dt><dd>' + escapeHtml(state.email) + '</dd>' +
+                    '<dt>Necesidad</dt><dd>' + escapeHtml(state.needs.join(', ')) + '</dd>' +
+                    '<dt>Instalaciones</dt><dd>' + escapeHtml(state.installations) + '</dd>';
+            }
+
+            function escapeHtml(s) {
+                return String(s).replace(/[&<>"']/g, function (c) {
+                    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+                });
+            }
+
+            // Next / back buttons
+            form.addEventListener('click', function (e) {
+                var btn = e.target.closest('[data-action]');
+                if (!btn) return;
+                var action = btn.getAttribute('data-action');
+                if (action === 'next') {
+                    if (!validateStep(current)) return;
+                    var next = current + 1;
+                    if (next > STEPS) return;
+                    if (next === 5) buildReview();
+                    showStep(next);
+                } else if (action === 'back') {
+                    if (current > 1) showStep(current - 1);
+                } else if (action === 'restart') {
+                    state = { name: '', email: '', needs: [], installations: '' };
+                    nameInput.value = '';
+                    emailInput.value = '';
+                    needsHidden.value = '';
+                    instHidden.value = '';
+                    form.querySelectorAll('.option-chip.is-selected').forEach(function (c) { c.classList.remove('is-selected'); });
+                    showStep(1);
+                }
+            });
+
+            // Live error clearing
+            nameInput.addEventListener('input', function () { if (nameInput.value.trim().length >= 2) setError('lead-name', false); });
+            emailInput.addEventListener('input', function () { setError('lead-email', false); });
+
+            // Enter key on text inputs advances
+            [nameInput, emailInput].forEach(function (inp) {
+                inp.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        var next = form.querySelector('.lead-step.is-active [data-action="next"]');
+                        if (next) next.click();
+                    }
+                });
+            });
+
+            // Option chips (multi & single)
+            form.querySelectorAll('.option-chip').forEach(function (chip) {
+                chip.addEventListener('click', function () {
+                    var multi = chip.getAttribute('data-multi') === 'true';
+                    var value = chip.getAttribute('data-value');
+                    var group = chip.parentElement;
+                    if (multi) {
+                        chip.classList.toggle('is-selected');
+                        var idx = state.needs.indexOf(value);
+                        if (chip.classList.contains('is-selected')) {
+                            if (idx === -1) state.needs.push(value);
+                        } else {
+                            if (idx !== -1) state.needs.splice(idx, 1);
+                        }
+                        setError('needs', false);
+                    } else {
+                        // single-select: clear siblings
+                        group.querySelectorAll('.option-chip').forEach(function (c) { c.classList.remove('is-selected'); });
+                        chip.classList.add('is-selected');
+                        state.installations = value;
+                        setError('installations', false);
+                    }
+                });
+            });
+
+            // Submit (DEMO) — preserves prior behavior: simulate then show success
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
-                successBox.classList.add('hidden');
+                if (!validateStep(4)) { showStep(4); return; }
 
-                if (!form.checkValidity()) {
-                    form.reportValidity();
-                    return;
+                if (submitBtn) {
+                    var labelDef = submitBtn.querySelector('[data-label-default]');
+                    var labelLoad = submitBtn.querySelector('[data-label-loading]');
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.75';
+                    if (labelDef) labelDef.classList.add('hidden');
+                    if (labelLoad) labelLoad.classList.remove('hidden');
                 }
 
-                // Demo only: simulate a brief loading state then show success.
-                setLoading(true);
                 setTimeout(function () {
-                    setLoading(false);
-                    successBox.classList.remove('hidden');
-                    form.reset();
-                    successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 600);
+                    if (submitBtn) {
+                        var labelDef = submitBtn.querySelector('[data-label-default]');
+                        var labelLoad = submitBtn.querySelector('[data-label-loading]');
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                        if (labelDef) labelDef.classList.remove('hidden');
+                        if (labelLoad) labelLoad.classList.add('hidden');
+                    }
+                    var nameTag = successEl.querySelector('[data-success-name]');
+                    if (nameTag) nameTag.textContent = state.name || '';
+                    showStep('success');
+                }, 700);
             });
+
+            // Initial state
+            showStep(1);
         })();
 
         // ── Smooth scroll offset for sticky nav ──
         document.querySelectorAll('a[href^="#"]').forEach(function (a) {
             a.addEventListener('click', function (e) {
-                const id = a.getAttribute('href');
+                var id = a.getAttribute('href');
                 if (!id || id === '#') return;
-                const target = document.querySelector(id);
+                var target = document.querySelector(id);
                 if (!target) return;
                 e.preventDefault();
-                const top = target.getBoundingClientRect().top + window.pageYOffset - 72;
+                var offset = window.matchMedia('(min-width: 768px)').matches ? 88 : 72;
+                var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
                 window.scrollTo({ top: top, behavior: 'smooth' });
             });
         });
